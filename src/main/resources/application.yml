@@ -1,3 +1,21 @@
 spring:
   application:
     name: two-approval-content-backend
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: ${USERNAME_MONGO_DB}
+      password: ${PASSWORD_MONGO_DB}
+      database: ${DB_MONGO_DB}
+      authentication-database: ${AUTH_DB_MONGO_DB}
+  ai:
+    deepseek:
+      api-key: ${DEEP_SEEK_API_KEY}
+
+  contexts:
+    security:
+      jwt:
+        secret: ${SECRET_JWT}
+    api:
+      key: ${API_KEY}
