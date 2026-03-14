@@ -258,5 +258,11 @@ Após **APPROVED** humano → **PUBLISHED**
 
 > 🎯 IA é dependência externa, não regra de negócio central.
 
-Link para modelagem do projeto:
+## 🔗 Links uteis:
+
 ### 🌐 [Arquitetura do projeto](https://drive.google.com/file/d/1dxgkLCqjlx8CZeB91uziATsVNMvY9ido/view?usp=drive_link)
+### 🌐 [Artigo de tratamento global de erros (EP.10)](https://www.linkedin.com/pulse/tratamento-global-de-erros-em-apis-rest-rafael-serdeiro-paes-leme-i1hpe/)
+### 🌐 [Meu Linkedin](https://www.linkedin.com/in/rafaelspaeslemeads/)
+### 🌐 [Meu Canal](https://www.youtube.com/@rafaelpaesleme-dev)
+### 🌐 [Instagram](https://www.instagram.com/devandcontainers/)
+### 🌐 [Grupo do WhatsApp](https://chat.whatsapp.com/IUHaVq7HangFhcyIgwVyAn)
