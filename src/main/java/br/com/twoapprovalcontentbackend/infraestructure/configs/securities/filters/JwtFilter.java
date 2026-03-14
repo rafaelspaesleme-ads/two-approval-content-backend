@@ -2,6 +2,7 @@ package br.com.twoapprovalcontentbackend.infraestructure.configs.securities.filt
 
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.services.ConfigUserDetailsService;
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.services.JwtService;
+import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessForbiddenException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (Objects.isNull(authorization) || !authorization.startsWith("Bearer ")) {
 
             if (Objects.nonNull(apiKeyHeader) && !Objects.equals(apiKeyHeader, this.apiKey)) {
-                throw new RuntimeException("Chave de api invalida!"); //TODO: substituir RuntimeException por ForbbidenException
+                throw new BusinessForbiddenException("Você não tem permissão para prosseguir com essa requisição. Chave de api invalida!");
             }
 
             filterChain.doFilter(request, response);

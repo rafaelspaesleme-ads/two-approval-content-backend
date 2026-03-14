@@ -19,3 +19,7 @@ spring:
         secret: ${SECRET_JWT}
     api:
       key: ${API_KEY}
+
+server:
+  servlet:
+    context-path: /api/two-approval-content

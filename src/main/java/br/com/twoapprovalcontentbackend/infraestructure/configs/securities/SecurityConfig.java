@@ -1,7 +1,5 @@
 package br.com.twoapprovalcontentbackend.infraestructure.configs.securities;
 
-import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.fails.ConfigAccessDeniedHandlerFail;
-import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.fails.ConfigAuthenticationEntrypointHandlerFail;
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.filters.JwtFilter;
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.filters.MatchersFilter;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +20,6 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
 
-    private final ConfigAccessDeniedHandlerFail accessDeniedHandlerFail;
-
-    private final ConfigAuthenticationEntrypointHandlerFail authenticationEntrypointHandlerFail;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             return http
@@ -42,8 +36,6 @@ public class SecurityConfig {
                             .anyRequest()
                             .authenticated())
                     .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                    .exceptionHandling(ex -> ex.authenticationEntryPoint(this.authenticationEntrypointHandlerFail)
-                            .accessDeniedHandler(this.accessDeniedHandlerFail))
                     .build();
     }
 
