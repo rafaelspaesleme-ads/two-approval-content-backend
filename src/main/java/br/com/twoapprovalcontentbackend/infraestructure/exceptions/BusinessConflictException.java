@@ -2,7 +2,7 @@ package br.com.twoapprovalcontentbackend.infraestructure.exceptions;
 
 public class BusinessConflictException extends BusinessException {
 
-    protected BusinessConflictException(String message) {
+    public BusinessConflictException(String message) {
         super(message);
     }
 

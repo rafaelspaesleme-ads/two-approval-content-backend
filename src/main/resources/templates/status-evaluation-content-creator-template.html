@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status da Avaliação - Two Approval Content</title>
+    <style>
+        /* Reset básico para e-mails */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #F9F7F3;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        /* Container principal */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Header com gradiente */
+        .email-header {
+            background: linear-gradient(135deg, #2C3E2F 0%, #1E2A22 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .email-header h1 {
+            color: #FFFFFF;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin: 0;
+        }
+
+        .email-header p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 16px;
+            margin-top: 12px;
+        }
+
+        /* Conteúdo principal */
+        .email-content {
+            padding: 48px 40px;
+            background: #FFFFFF;
+        }
+
+        /* Saudação */
+        .greeting {
+            margin-bottom: 32px;
+        }
+
+        .greeting h2 {
+            color: #2C3E2F;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .greeting p {
+            color: #5A6B5A;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Card de informações do conteúdo */
+        .content-card {
+            background: linear-gradient(135deg, #FEF9E6 0%, #FFF8E8 100%);
+            border-radius: 16px;
+            padding: 28px;
+            margin: 32px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-niche {
+            display: inline-block;
+            background-color: rgba(230, 177, 126, 0.2);
+            color: #B87C4E;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .content-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2C3E2F;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        /* Status badge */
+        .status-badge {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .status-approved {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-left: 4px solid #4CAF50;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-left: 4px solid #FF9800;
+        }
+
+        .status-rejected {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border-left: 4px solid #F44336;
+        }
+
+        .status-revision {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 4px solid #2196F3;
+        }
+
+        .status-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .status-text {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .status-approved .status-text {
+            color: #2E7D32;
+        }
+
+        .status-pending .status-text {
+            color: #ED6C02;
+        }
+
+        .status-rejected .status-text {
+            color: #D32F2F;
+        }
+
+        .status-revision .status-text {
+            color: #1976D2;
+        }
+
+        .status-message {
+            font-size: 14px;
+            color: #5A6B5A;
+            margin-top: 8px;
+        }
+
+        /* Detalhes da avaliação */
+        .evaluation-details {
+            background-color: #F9F7F3;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .evaluation-details h3 {
+            color: #2C3E2F;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #E8E0D0;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #8B9A6E;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #2C3E2F;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Feedback adicional */
+        .feedback-box {
+            background-color: #FFFFFF;
+            border: 1px solid #E8E0D0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .feedback-box h4 {
+            color: #2C3E2F;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feedback-text {
+            color: #5A6B5A;
+            font-size: 14px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Próximos passos */
+        .next-steps {
+            background: linear-gradient(135deg, #F9F7F3 0%, #F5F2EC 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .next-steps h3 {
+            color: #2C3E2F;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .next-steps li {
+            color: #5A6B5A;
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .next-steps li:before {
+            content: "→";
+            color: #E6B17E;
+            font-weight: bold;
+            position: absolute;
+            left: 4px;
+            top: 0;
+        }
+
+        /* Botão de ação */
+        .action-button {
+            text-align: center;
+            margin: 40px 0 24px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #E6B17E;
+            color: #2C3E2F;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(230, 177, 126, 0.3);
+        }
+
+        .button:hover {
+            background-color: #D9A066;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(230, 177, 126, 0.4);
+        }
+
+        /* Footer */
+        .email-footer {
+            background-color: #F9F7F3;
+            padding: 32px 40px;
+            text-align: center;
+            border-top: 1px solid #E8E0D0;
+        }
+
+        .email-footer p {
+            color: #8B9A6E;
+            font-size: 12px;
+            margin: 8px 0;
+        }
+
+        .social-links {
+            margin-top: 16px;
+        }
+
+        .social-links a {
+            color: #B87C4E;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 20px;
+            display: inline-block;
+        }
+
+        /* Responsividade */
+        @media only screen and (max-width: 600px) {
+            .email-content {
+                padding: 32px 24px;
+            }
+
+            .email-footer {
+                padding: 24px 24px;
+            }
+
+            .email-header h1 {
+                font-size: 24px;
+            }
+
+            .status-text {
+                font-size: 20px;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+
+    <!-- Header com gradiente -->
+    <div class="email-header">
+        <div class="logo-icon">
+            🎬
+        </div>
+        <h1>STATUS DA AVALIAÇÃO</h1>
+        <p>Seu conteúdo foi analisado pela nossa equipe</p>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="email-content">
+
+        <!-- Saudação personalizada -->
+        <div class="greeting">
+            <h2>Olá, <span th:text="${fullname}" style="color: #E6B17E;">[Nome do Criador]</span>!</h2>
+            <p>Recebemos o conteúdo que você enviou para avaliação. Nossa equipe já realizou a análise e temos o resultado disponível para você.</p>
+        </div>
+
+        <!-- Card de informações do conteúdo -->
+        <div class="content-card">
+            <div class="content-niche" th:text="${niche}">
+                [Nicho do Conteúdo]
+            </div>
+            <div class="content-title" th:text="${title}">
+                Título do Conteúdo Avaliado
+            </div>
+
+            <!-- Status badge dinâmico -->
+            <div th:switch="${status}" class="status-badge">
+                <!-- Status: Aprovado -->
+                <div th:case="'APPROVED'" class="status-approved">
+                    <div class="status-icon">✅</div>
+                    <div class="status-text">Conteúdo Aprovado!</div>
+                    <div class="status-message">Parabéns! Seu conteúdo atende a todos os critérios de qualidade.</div>
+                </div>
+
+                <!-- Status: Pendente -->
+                <div th:case="'IN_REVIEW'" class="status-pending">
+                    <div class="status-icon">⏳</div>
+                    <div class="status-text">Análise em Andamento</div>
+                    <div class="status-message">Seu conteúdo ainda está em processo de avaliação.</div>
+                </div>
+
+                <!-- Status: Reprovado -->
+                <div th:case="'REJECTED'" class="status-rejected">
+                    <div class="status-icon">❌</div>
+                    <div class="status-text">Aguardando Ajustes</div>
+                    <div class="status-message">Alguns pontos precisam ser revisados para aprovação.</div>
+                </div>
+
+                <!-- Status padrão (caso não seja nenhum dos acima) -->
+                <div th:case="*" class="status-pending">
+                    <div class="status-icon">📋</div>
+                    <div class="status-text" th:text="${status}">Status do Conteúdo</div>
+                    <div class="status-message">Aguardando informações adicionais.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detalhes da avaliação -->
+        <div class="evaluation-details">
+            <h3>
+                <span>📊</span> Detalhes da Avaliação
+            </h3>
+            <div class="detail-item">
+                <span class="detail-label">Identificador do conteúdo:</span>
+                <span class="detail-value" th:text="${contentId}">123</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Data da Avaliação:</span>
+                <span class="detail-value" th:text="${evaluationDate}">15/03/2024</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Avaliador Responsável:</span>
+                <span class="detail-value" th:text="${evaluationName}">Equipe de Curadoria</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Tempo de Análise:</span>
+                <span class="detail-value" th:text="${timeAnalysis}">2 dias</span>
+            </div>
+        </div>
+
+        <!-- Feedback adicional (opcional) -->
+        <div th:if="${feedback != null}" class="feedback-box">
+            <h4>💬 Feedback do Avaliador</h4>
+            <div class="feedback-text" th:text="${feedback}">
+                Excelente conteúdo! A edição está impecável e o storytelling envolvente. Continue com esse padrão de qualidade!
+            </div>
+        </div>
+
+        <!-- Próximos passos baseado no status -->
+        <div th:switch="${status}" class="next-steps">
+            <!-- Próximos passos para Aprovado -->
+            <div th:case="'APPROVED'">
+                <h3>🎯 Próximos Passos</h3>
+                <ul>
+                    <li>Seu conteúdo já pode ser publicado</li>
+                    <li>Compartilhe com sua audiência e acompanhe os resultados</li>
+                    <li>Continue produzindo conteúdo de alta qualidade!</li>
+                </ul>
+            </div>
+
+            <!-- Próximos passos para Revisão/Reprovado -->
+            <div th:case="'REJECTED'">
+                <h3>📝 Próximos Passos</h3>
+                <ul>
+                    <li>Revise as sugestões de melhoria indicadas no feedback</li>
+                    <li>Realize os ajustes necessários no seu conteúdo</li>
+                    <li>Envie uma nova versão para reavaliação</li>
+                    <li>Estamos aqui para ajudar no que precisar!</li>
+                </ul>
+            </div>
+
+            <!-- Próximos passos para Pendente -->
+            <div th:case="'IN_REVIEW'">
+                <h3>⏳ Acompanhamento</h3>
+                <ul>
+                    <li>Sua análise está em andamento</li>
+                    <li>Você receberá uma atualização em breve</li>
+                    <li>O prazo médio de análise é de 3 a 5 dias úteis</li>
+                    <li>Agradecemos sua paciência!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="email-footer">
+        <p>© 2024 Two Approval Content - Todos os direitos reservados</p>
+        <p>🌟 API de aprovação de conteúdo em 2 etapas</p>
+        <div class="social-links">
+            <a th:href="${apiSupportMail}" title="E-mail de contato">📧</a>
+            <a th:href="${apiSupportWhatsApp}" title="Siga-nos no Instagram">📱</a>
+            <a th:href="${apiDoc}" title="Inscreva-se no YouTube">💻</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

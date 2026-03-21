@@ -12,6 +12,18 @@ spring:
   ai:
     deepseek:
       api-key: ${DEEP_SEEK_API_KEY}
+  mail:
+    host: ${HOST_SRV_MAIL}
+    port: ${PORT_SRV_MAIL}
+    username: ${USERNAME_SRV_MAIL}
+    password: ${PASSWORD_SRV_MAIL}
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
 
   contexts:
     security:
@@ -19,6 +31,10 @@ spring:
         secret: ${SECRET_JWT}
     api:
       key: ${API_KEY}
+    support:
+      email: ${CONTEXTS_SUPPORT_EMAIL}
+      whatsapp: ${CONTEXTS_SUPPORT_WHATSAPP}
+      linkDoc: ${CONTEXTS_SUPPORT_DOC}
 
 server:
   servlet:
