@@ -9,7 +9,7 @@
 
 - 3º Live: Configurações genericas de envio de e-mail - ok
 
-- 4º Live: Configurações generica do builder (mappers)
+- 4º Live: Configurações generica do builder (mappers) - ok
 
 - 5º Live: Configuração generica de envio de Webhook
 
