@@ -10,7 +10,7 @@ public class BusinessInternalServerErrorException extends BusinessException {
         super(message, hasMetadata);
     }
 
-    protected BusinessInternalServerErrorException(String message, Throwable cause, boolean hasMetadata) {
+    public BusinessInternalServerErrorException(String message, Throwable cause, boolean hasMetadata) {
         super(message, cause, hasMetadata);
     }
 }
