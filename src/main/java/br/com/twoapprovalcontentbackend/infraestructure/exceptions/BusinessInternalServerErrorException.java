@@ -6,7 +6,7 @@ public class BusinessInternalServerErrorException extends BusinessException {
         super(message);
     }
 
-    protected BusinessInternalServerErrorException(String message, boolean hasMetadata) {
+    public BusinessInternalServerErrorException(String message, boolean hasMetadata) {
         super(message, hasMetadata);
     }
 

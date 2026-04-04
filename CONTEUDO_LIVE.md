@@ -3,16 +3,38 @@
 ## Parte do desenvolvimento do código:
 
 
-- 1ª Live: Configuração dos pacotes + Spring Security - ok
+- 01ª Live: Configuração dos pacotes + Spring Security - ok
 
-- 2ª Live: Configurações globais das exceptions - ok
+- 02ª Live: Configurações globais das exceptions - ok
 
-- 3º Live: Configurações genericas de envio de e-mail - ok
+- 03º Live: Configurações genericas de envio de e-mail - ok
 
-- 4º Live: Configurações generica do builder (mappers) - ok
+- 04º Live: Configurações generica do builder (mappers) - ok
 
-- 5º Live: Configuração generica de envio de Webhook
+- 05º Live: Configuração generica de envio de Webhook - ok
 
-- 6º Live: Criação do serviço do DeepSeekClient
+- 06º Live: Criação do serviço do DeepSeekClient
 
-- 7º Live: Criação do serviço de registrar avaliador
+- 07º Live: Criação do serviço de registrar usuário humano avaliador
+
+- 08º Live: Criação do serviço de login usuário humano avaliador
+
+- 09º Live: Criação do serviço de envio de conteúdo (criador de conteúdo)
+
+- 10º Live: Criação do serviço de verificar status do conteúdo (findStatus)
+
+- 11º Live: Criação do serviço de consulta de conteúdos destinados a um avaliador
+
+- 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation)
+
+- 13º Live: Criação do serviço de envio de notificações de avaliações concluídas
+
+- 14º Live: Criação do serviço de deletar avaliações já concluídas e enviadas para o criador de conteúdo
+
+- 15º Live: Configurações do Swagger
+
+- 16º Live: Criação de testes unitários
+
+- 17º Live: Criação de testes de integração
+
+- 18º Live de fechamento: Documentação e analises da API (Plus: Apresentar o novo projeto)
