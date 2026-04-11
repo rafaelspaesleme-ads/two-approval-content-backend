@@ -12,6 +12,9 @@ spring:
   ai:
     deepseek:
       api-key: ${DEEP_SEEK_API_KEY}
+      chat:
+        options:
+          temperature: 0.0
   mail:
     host: ${HOST_SRV_MAIL}
     port: ${PORT_SRV_MAIL}
