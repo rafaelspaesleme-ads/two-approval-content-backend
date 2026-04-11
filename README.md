@@ -260,7 +260,7 @@ Após **APPROVED** humano → **PUBLISHED**
 
 ## 🔗 Links uteis:
 
-### 🌐 [Arquitetura do projeto](https://drive.google.com/file/d/1dxgkLCqjlx8CZeB91uziATsVNMvY9ido/view?usp=drive_link)
+### 🌐 [Arquitetura do projeto](https://drive.google.com/drive/folders/1YkPJ_2BgLHbCl8TOToNwWLNCTpVGEFTF?usp=drive_link)
 ### 🌐 [Artigo de tratamento global de erros (EP.10)](https://www.linkedin.com/pulse/tratamento-global-de-erros-em-apis-rest-rafael-serdeiro-paes-leme-i1hpe/)
 ### 🌐 [Meu Linkedin](https://www.linkedin.com/in/rafaelspaeslemeads/)
 ### 🌐 [Meu Canal](https://www.youtube.com/@rafaelpaesleme-dev)
