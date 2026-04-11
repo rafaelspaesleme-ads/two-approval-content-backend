@@ -13,17 +13,17 @@
 
 - 05º Live: Configuração generica de envio de Webhook - ok
 
-- 06º Live: Criação do serviço do DeepSeekClient
+- 06º Live: Criação do serviço do DeepSeekClient - ok
 
-- 07º Live: Criação do serviço de registrar usuário humano avaliador
+- 07º Live: Criação do serviço (endpoint) de registrar usuário humano avaliador
 
-- 08º Live: Criação do serviço de login usuário humano avaliador
+- 08º Live: Criação do serviço (endpoint) de login usuário humano avaliador
 
-- 09º Live: Criação do serviço de envio de conteúdo (criador de conteúdo)
+- 09º Live: Criação do serviço (endpoint) de envio de conteúdo (criador de conteúdo)
 
-- 10º Live: Criação do serviço de verificar status do conteúdo (findStatus)
+- 10º Live: Criação do serviço (endpoint) de verificar status do conteúdo (findStatus)
 
-- 11º Live: Criação do serviço de consulta de conteúdos destinados a um avaliador
+- 11º Live: Criação do serviço de (endpoint) consulta de conteúdos destinados a um avaliador
 
 - 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation)
 
