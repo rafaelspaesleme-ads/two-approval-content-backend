@@ -2,7 +2,7 @@ package br.com.twoapprovalcontentbackend.infraestructure.exceptions;
 
 public class BusinessNotFoundException extends BusinessException {
 
-    protected BusinessNotFoundException(String message) {
+    public BusinessNotFoundException(String message) {
         super(message);
     }
 

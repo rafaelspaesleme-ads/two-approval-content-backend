@@ -15,7 +15,7 @@
 
 - 06º Live: Criação do serviço do DeepSeekClient - ok
 
-- 07º Live: Criação do serviço (endpoint) de registrar usuário humano avaliador
+- 07º Live: Criação do serviço (endpoint) de registrar usuário humano avaliador - ok
 
 - 08º Live: Criação do serviço (endpoint) de login usuário humano avaliador
 

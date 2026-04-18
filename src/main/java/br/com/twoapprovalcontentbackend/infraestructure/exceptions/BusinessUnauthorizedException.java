@@ -2,7 +2,7 @@ package br.com.twoapprovalcontentbackend.infraestructure.exceptions;
 
 public class BusinessUnauthorizedException extends BusinessException {
 
-    protected BusinessUnauthorizedException(String message) {
+    public BusinessUnauthorizedException(String message) {
         super(message);
     }
 

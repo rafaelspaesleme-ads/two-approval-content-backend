@@ -1,6 +1,7 @@
 package br.com.twoapprovalcontentbackend.infraestructure.persistences.models;
 
 import br.com.twoapprovalcontentbackend.domain.AuditEntity;
+import br.com.twoapprovalcontentbackend.infraestructure.enums.NichesEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,9 +26,9 @@ public class UserEvaluatorDocument extends AuditEntity implements UserDetails {
 
     private String email;
 
-    private String niche;
+    private NichesEnum niche;
 
-    private String password;
+    private String secret;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -36,7 +37,7 @@ public class UserEvaluatorDocument extends AuditEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return this.secret;
     }
 
     @Override

@@ -1,9 +1,13 @@
 package br.com.twoapprovalcontentbackend.application.mappers;
 
-import br.com.twoapprovalcontentbackend.infraestructure.interfaces.HeptaConsumerFunction;
-import br.com.twoapprovalcontentbackend.infraestructure.interfaces.HexaConsumerFunction;
-import br.com.twoapprovalcontentbackend.infraestructure.interfaces.PentaConsumerFunction;
-import br.com.twoapprovalcontentbackend.infraestructure.interfaces.TetraConsumerFunction;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.consumers.HeptaConsumer;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.consumers.HexaConsumer;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.consumers.PentaConsumer;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.consumers.TetraConsumer;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.functions.HeptaFunction;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.functions.HexaFunction;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.functions.PentaFunction;
+import br.com.twoapprovalcontentbackend.infraestructure.interfaces.functions.TetraFunction;
 import br.com.twoapprovalcontentbackend.infraestructure.utils.PageableUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -22,6 +26,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -31,6 +36,8 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     @Setter
     protected I input;
 
+    @Getter
+    @Setter
     protected O output;
 
     @Getter
@@ -64,7 +71,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
         return this.mapper.convertValue(request, destinationInputClass);
     }
 
-    protected R getBuild() {
+    public R getBuild() {
         return this.mapper.convertValue(this.output, this.destinationResponseClass);
     }
 
@@ -105,7 +112,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D>  void setVoid(TetraConsumerFunction<A, B, C, D, Void> result) {
+    public <A, B, C, D>  void setVoid(TetraConsumer<A, B, C, D> result) {
         result.accept(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -115,7 +122,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E>  void setVoid(PentaConsumerFunction<A, B, C, D, E, Void> result) {
+    public <A, B, C, D, E>  void setVoid(PentaConsumer<A, B, C, D, E> result) {
         result.accept(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -126,7 +133,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F>  void setVoid(HexaConsumerFunction<A, B, C, D, E, F, Void> result) {
+    public <A, B, C, D, E, F>  void setVoid(HexaConsumer<A, B, C, D, E, F> result) {
         result.accept(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -138,7 +145,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F, G>  void setVoid(HeptaConsumerFunction<A, B, C, D, E, F, G, Void> result) {
+    public <A, B, C, D, E, F, G>  void setVoid(HeptaConsumer<A, B, C, D, E, F, G> result) {
         result.accept(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -148,6 +155,11 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
                 (F) this.multiInput[5],
                 (G) this.multiInput[6]
         );
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setOutput(UnaryOperator<I> result) {
+        this.output = (O) result.apply(this.input);
     }
 
     public void setOutput(Function<I, O> result) {
@@ -218,7 +230,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D> void setOutput(TetraConsumerFunction<A, B, C, D, O> result) {
+    public <A, B, C, D> void setOutput(TetraFunction<A, B, C, D, O> result) {
         this.output = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -228,7 +240,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D> void setOutputList(TetraConsumerFunction<A, B, C, D, List<O>> result) {
+    public <A, B, C, D> void setOutputList(TetraFunction<A, B, C, D, List<O>> result) {
         this.outputList = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -238,7 +250,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D> void setOutputPage(TetraConsumerFunction<A, B, C, D, Page<O>> result) {
+    public <A, B, C, D> void setOutputPage(TetraFunction<A, B, C, D, Page<O>> result) {
         this.outputPage = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -248,7 +260,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E> void setOutput(PentaConsumerFunction<A, B, C, D, E, O> result) {
+    public <A, B, C, D, E> void setOutput(PentaFunction<A, B, C, D, E, O> result) {
         this.output = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -259,7 +271,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E> void setOutputList(PentaConsumerFunction<A, B, C, D, E, List<O>> result) {
+    public <A, B, C, D, E> void setOutputList(PentaFunction<A, B, C, D, E, List<O>> result) {
         this.outputList = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -270,7 +282,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E> void setOutputPage(PentaConsumerFunction<A, B, C, D, E, Page<O>> result) {
+    public <A, B, C, D, E> void setOutputPage(PentaFunction<A, B, C, D, E, Page<O>> result) {
         this.outputPage = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -281,7 +293,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F> void setOutput(HexaConsumerFunction<A, B, C, D, E, F, O> result) {
+    public <A, B, C, D, E, F> void setOutput(HexaFunction<A, B, C, D, E, F, O> result) {
         this.output = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -293,7 +305,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F> void setOutputList(HexaConsumerFunction<A, B, C, D, E, F, List<O>> result) {
+    public <A, B, C, D, E, F> void setOutputList(HexaFunction<A, B, C, D, E, F, List<O>> result) {
         this.outputList = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -305,7 +317,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F> void setOutputPage(HexaConsumerFunction<A, B, C, D, E, F, Page<O>> result) {
+    public <A, B, C, D, E, F> void setOutputPage(HexaFunction<A, B, C, D, E, F, Page<O>> result) {
         this.outputPage = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -317,7 +329,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F, G> void setOutput(HeptaConsumerFunction<A, B, C, D, E, F, G, O> result) {
+    public <A, B, C, D, E, F, G> void setOutput(HeptaFunction<A, B, C, D, E, F, G, O> result) {
         this.output = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -330,7 +342,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F, G> void setOutputList(HeptaConsumerFunction<A, B, C, D, E, F, G, List<O>> result) {
+    public <A, B, C, D, E, F, G> void setOutputList(HeptaFunction<A, B, C, D, E, F, G, List<O>> result) {
         this.outputList = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],
@@ -343,7 +355,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     }
 
     @SuppressWarnings("unchecked")
-    public <A, B, C, D, E, F, G> void setOutputPage(HeptaConsumerFunction<A, B, C, D, E, F, G, Page<O>> result) {
+    public <A, B, C, D, E, F, G> void setOutputPage(HeptaFunction<A, B, C, D, E, F, G, Page<O>> result) {
         this.outputPage = result.apply(
                 (A) this.multiInput[0],
                 (B) this.multiInput[1],

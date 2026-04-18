@@ -30,4 +30,6 @@ public abstract class AuditEntity implements Serializable {
     @LastModifiedDate
     private Instant updatedAt;
 
+    private String comments;
+
 }
