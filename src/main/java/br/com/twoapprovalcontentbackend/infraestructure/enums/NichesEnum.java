@@ -1,11 +1,13 @@
 package br.com.twoapprovalcontentbackend.infraestructure.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 
 @Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum NichesEnum {
     TECHNOLOGY("Technology", "Tecnologia e Software"),
     HEALTH_WELLNESS("Health & Wellness", "Saúde e Bem-estar"),

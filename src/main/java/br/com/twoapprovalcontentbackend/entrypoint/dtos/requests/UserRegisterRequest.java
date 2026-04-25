@@ -1,6 +1,6 @@
 package br.com.twoapprovalcontentbackend.entrypoint.dtos.requests;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public record UserRegisterRequest(
         @NotNull(message = "Nome completo do avaliador não pode ser nulo.")

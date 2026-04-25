@@ -1,5 +1,7 @@
 package br.com.twoapprovalcontentbackend.infraestructure.configs.securities;
 
+import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.fails.CustomAuthenticationSecurityHandler;
+import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.fails.CustomForbiddenSecurityHandler;
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.filters.JwtFilter;
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.filters.MatchersFilter;
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessUnauthorizedException;
@@ -24,24 +26,27 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
+    private final CustomForbiddenSecurityHandler customForbiddenSecurityHandler;
+    private final CustomAuthenticationSecurityHandler customAuthenticationSecurityHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-            return http
-                    .csrf(AbstractHttpConfigurer::disable)
-                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authorizeHttpRequests(auth -> auth.
-                            requestMatchers(HttpMethod.GET, MatchersFilter.getGets()).permitAll()
-                            .requestMatchers(HttpMethod.POST, MatchersFilter.getPosts()).permitAll()
-                            .requestMatchers(HttpMethod.PUT, MatchersFilter.getPuts()).permitAll()
-                            .requestMatchers(HttpMethod.PATCH, MatchersFilter.getPatchs()).permitAll()
-                            .requestMatchers(HttpMethod.DELETE, MatchersFilter.getDeletes()).permitAll()
-                            .requestMatchers(HttpMethod.OPTIONS, MatchersFilter.getOptions()).permitAll()
-                            .requestMatchers(MatchersFilter.getDocs()).permitAll()
-                            .anyRequest()
-                            .authenticated())
-                    .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                    .build();
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth.
+                        requestMatchers(HttpMethod.GET, MatchersFilter.getGets()).permitAll()
+                        .requestMatchers(HttpMethod.POST, MatchersFilter.getPosts()).permitAll()
+                        .requestMatchers(HttpMethod.PUT, MatchersFilter.getPuts()).permitAll()
+                        .requestMatchers(HttpMethod.PATCH, MatchersFilter.getPatchs()).permitAll()
+                        .requestMatchers(HttpMethod.DELETE, MatchersFilter.getDeletes()).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, MatchersFilter.getOptions()).permitAll()
+                        .requestMatchers(MatchersFilter.getDocs()).permitAll()
+                        .anyRequest()
+                        .authenticated())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationSecurityHandler).accessDeniedHandler(customForbiddenSecurityHandler))
+                .build();
     }
 
     @Bean

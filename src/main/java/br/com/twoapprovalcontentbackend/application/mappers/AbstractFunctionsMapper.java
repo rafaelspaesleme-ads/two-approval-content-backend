@@ -37,7 +37,6 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
     protected I input;
 
     @Getter
-    @Setter
     protected O output;
 
     @Getter

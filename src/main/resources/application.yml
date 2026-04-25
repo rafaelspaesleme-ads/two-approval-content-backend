@@ -9,6 +9,7 @@ spring:
       password: ${PASSWORD_MONGO_DB}
       database: ${DB_MONGO_DB}
       authentication-database: ${AUTH_DB_MONGO_DB}
+      auto-index-creation: true
   ai:
     deepseek:
       api-key: ${DEEP_SEEK_API_KEY}
@@ -32,8 +33,12 @@ spring:
     security:
       jwt:
         secret: ${SECRET_JWT}
+        expiration:
+          millis: 3600000
     api:
-      key: ${API_KEY}
+      key:
+        evaluation: ${API_EVALUATION_KEY}
+        creatorContent: ${API_CREATOR_CONTENT_KEY}
     support:
       email: ${CONTEXTS_SUPPORT_EMAIL}
       whatsapp: ${CONTEXTS_SUPPORT_WHATSAPP}

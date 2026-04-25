@@ -15,6 +15,9 @@ public class JwtService {
     @Value(value = "${spring.contexts.security.jwt.secret}")
     private String secret;
 
+    @Value(value = "${spring.contexts.security.jwt.expiration.millis}")
+    private long expiration;
+
     private Key getKey() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(this.secret));
     }
@@ -23,7 +26,7 @@ public class JwtService {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
+                .setExpiration(new Date(System.currentTimeMillis() + this.expiration))
                 .signWith(this.getKey())
                 .compact();
     }

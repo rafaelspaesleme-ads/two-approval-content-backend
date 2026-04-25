@@ -7,10 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,11 +27,21 @@ public class UserEvaluatorDocument extends AuditEntity implements UserDetails {
 
     private String name;
 
+    @Indexed(unique = true)
     private String email;
 
     private NichesEnum niche;
 
     private String secret;
+
+    @Transient
+    private String token;
+
+    @Transient
+    private LocalDateTime initialLoginAt;
+
+    @Transient
+    private LocalDateTime expiresLoginAt;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

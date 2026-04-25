@@ -17,7 +17,7 @@
 
 - 07º Live: Criação do serviço (endpoint) de registrar usuário humano avaliador - ok
 
-- 08º Live: Criação do serviço (endpoint) de login usuário humano avaliador
+- 08º Live: Criação do serviço (endpoint) de login usuário humano avaliador - ok
 
 - 09º Live: Criação do serviço (endpoint) de envio de conteúdo (criador de conteúdo)
 

@@ -12,6 +12,7 @@ import br.com.twoapprovalcontentbackend.infraestructure.exceptions.model.ApiErro
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.model.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -121,7 +122,7 @@ public class GlobalExceptionHandler {
 
         log.error("[%s]::[%s]::[%s]".formatted(LocalDateTime.now(), UUID.randomUUID(), ex.getMessage()));
 
-        return this.globalBusinessExceptionResponse(new BusinessForbiddenException("Você não foi autenticado, por isso não autorização para prosseguir com a requisição."), request, "Erro de autenticação.", HttpStatus.UNAUTHORIZED);
+        return this.globalBusinessExceptionResponse(new BusinessForbiddenException("Você não foi autenticado, por isso não tem autorização para prosseguir com a requisição."), request, "Erro de autenticação.", HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(CredentialsExpiredException.class)
@@ -130,6 +131,30 @@ public class GlobalExceptionHandler {
         log.error("[%s]::[%s]::[%s]".formatted(LocalDateTime.now(), UUID.randomUUID(), ex.getMessage()));
 
         return this.globalBusinessExceptionResponse(new BusinessForbiddenException("Suas credenciais de acesso expiraram. Tente se conectar novamente."), request, "Login expirado.", HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(DuplicateKeyException.class)
+    public ResponseEntity<ApiErrorResponse> handleDuplicateKeyException(DuplicateKeyException ex, HttpServletRequest request) {
+
+        log.error("[%s]::[%s]::[%s]".formatted(LocalDateTime.now(), UUID.randomUUID(), ex.getMessage()));
+
+            String mensagemErro = ex.getMessage();
+        String fieldName = "desconhecido";
+
+        if (mensagemErro != null && mensagemErro.contains("index: ")) {
+            try {
+                int start = mensagemErro.indexOf("index: ") + 7;
+                int end = mensagemErro.indexOf("_", start);
+                if (end == -1) end = mensagemErro.indexOf(" ", start);
+
+                fieldName = mensagemErro.substring(start, end).trim();
+
+            } catch (Exception e) {
+                log.warn("Não foi possível extrair o nome do campo da DuplicateKeyException");
+            }
+        }
+
+        return this.globalBusinessExceptionResponse(new BusinessConflictException("Valor já existe para o campo [%s].".formatted(fieldName)), request, "Valor existente.", HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(Exception.class)

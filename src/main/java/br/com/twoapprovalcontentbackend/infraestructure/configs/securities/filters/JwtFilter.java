@@ -23,8 +23,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    @Value(value = "${spring.contexts.api.key}")
-    private String apiKey;
+    @Value(value = "${spring.contexts.api.key.evaluation}")
+    private String apiEvaluationKey;
+
+    @Value(value = "${spring.contexts.api.key.creatorContent}")
+    private String apiCreatorContentKey;
 
     private final JwtService jwtService;
 
@@ -34,12 +37,15 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-        String apiKeyHeader = request.getHeader("apiKey");
+        String evaluationKey = request.getHeader("apiEvaluationKey");
 
         if (Objects.isNull(authorization) || !authorization.startsWith("Bearer ")) {
 
-            if (Objects.nonNull(apiKeyHeader) && !Objects.equals(apiKeyHeader, this.apiKey)) {
-                throw new BusinessForbiddenException("Você não tem permissão para prosseguir com essa requisição. Chave de api invalida!");
+            if ("/user/register".equals(request.getServletPath()) && !Objects.equals(this.apiEvaluationKey, evaluationKey)) {
+                String msg = "Você não tem permissão para prosseguir com essa requisição. Chave de api invalida ou não inserida!";
+                request.setAttribute("error_apiEvaluationKey", msg);
+                request.setAttribute("error_requestURI", request.getRequestURI());
+                throw new BusinessForbiddenException(msg);
             }
 
             filterChain.doFilter(request, response);

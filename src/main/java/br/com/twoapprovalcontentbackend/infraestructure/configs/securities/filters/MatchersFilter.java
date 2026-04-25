@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 public class MatchersFilter {
 
     public static String[] getGets() {
-        return new String[] {};
+        return new String[] {
+                "/user/niches",
+                "/user/niches/**",
+        };
     }
 
     public static String[] getPosts() {

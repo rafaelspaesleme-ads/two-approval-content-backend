@@ -4,4 +4,6 @@ import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.User
 
 public interface EvaluatorGateway {
     UserEvaluatorDocument register(UserEvaluatorDocument document);
+
+    UserEvaluatorDocument login(UserEvaluatorDocument document);
 }

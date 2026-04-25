@@ -1,8 +1,11 @@
 package br.com.twoapprovalcontentbackend.application.services.impl;
 
+import br.com.twoapprovalcontentbackend.application.mappers.users.LoginBuilder;
 import br.com.twoapprovalcontentbackend.application.mappers.users.UserEvaludationRegisterMapper;
 import br.com.twoapprovalcontentbackend.application.services.UserService;
+import br.com.twoapprovalcontentbackend.entrypoint.dtos.requests.LoginRequest;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.requests.UserRegisterRequest;
+import br.com.twoapprovalcontentbackend.entrypoint.dtos.responses.LoginResponse;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.responses.UserRegisterResponse;
 import br.com.twoapprovalcontentbackend.infraestructure.gateways.EvaluatorGateway;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,16 @@ public class UserServiceImpl implements UserService {
         UserEvaludationRegisterMapper builder = new UserEvaludationRegisterMapper(request);
 
         builder.setOutput(this.evaluatorGateway::register);
+
+        return builder.getBuild();
+    }
+
+    @Override
+    public LoginResponse login(LoginRequest request) {
+
+        LoginBuilder builder = new LoginBuilder(request);
+
+        builder.setOutput(this.evaluatorGateway::login);
 
         return builder.getBuild();
     }
