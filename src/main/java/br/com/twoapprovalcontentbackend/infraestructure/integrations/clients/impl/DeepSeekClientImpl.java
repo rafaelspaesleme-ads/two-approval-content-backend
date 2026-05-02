@@ -61,8 +61,10 @@ public class DeepSeekClientImpl implements DeepSeekClient {
 
             return buildResponse(model, response, responseEvaluation);
         } catch (BusinessException e) {
+            log.error("DEEP_SEEK_API_ERROR::BusinessException::{}", e.getMessage());
             throw e;
         } catch (Exception e) {
+            log.error("DEEP_SEEK_API_ERROR::{}", e.getMessage());
             throw new BusinessInternalServerErrorException("Não foi possivel realizar avaliação com a IA.");
         }
 

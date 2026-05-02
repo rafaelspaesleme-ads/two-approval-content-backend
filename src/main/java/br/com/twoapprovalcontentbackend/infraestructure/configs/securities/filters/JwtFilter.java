@@ -38,13 +38,19 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         String evaluationKey = request.getHeader("apiEvaluationKey");
+        String creatorContentKey = request.getHeader("apiCreatorContentKey");
 
         if (Objects.isNull(authorization) || !authorization.startsWith("Bearer ")) {
 
+            String msg = "Você não tem permissão para prosseguir com essa requisição. Chave de api invalida ou não inserida!";
+            request.setAttribute("error_apiKey", msg);
+            request.setAttribute("error_requestURI", request.getRequestURI());
+
             if ("/user/register".equals(request.getServletPath()) && !Objects.equals(this.apiEvaluationKey, evaluationKey)) {
-                String msg = "Você não tem permissão para prosseguir com essa requisição. Chave de api invalida ou não inserida!";
-                request.setAttribute("error_apiEvaluationKey", msg);
-                request.setAttribute("error_requestURI", request.getRequestURI());
+                throw new BusinessForbiddenException(msg);
+            }
+
+            if (request.getServletPath().contains("/author/") && !Objects.equals(this.apiCreatorContentKey, creatorContentKey)) {
                 throw new BusinessForbiddenException(msg);
             }
 

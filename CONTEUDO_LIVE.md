@@ -19,7 +19,7 @@
 
 - 08º Live: Criação do serviço (endpoint) de login usuário humano avaliador - ok
 
-- 09º Live: Criação do serviço (endpoint) de envio de conteúdo (criador de conteúdo)
+- 09º Live: Criação do serviço (endpoint) de envio de conteúdo (criador de conteúdo) - ok
 
 - 10º Live: Criação do serviço (endpoint) de verificar status do conteúdo (findStatus)
 

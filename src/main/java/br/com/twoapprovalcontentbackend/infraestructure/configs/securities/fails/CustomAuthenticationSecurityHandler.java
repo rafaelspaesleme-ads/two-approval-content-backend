@@ -26,7 +26,7 @@ public class CustomAuthenticationSecurityHandler implements AuthenticationEntryP
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
 
 
-        Optional.ofNullable(request.getAttribute("error_apiEvaluationKey"))
+        Optional.ofNullable(request.getAttribute("error_apiKey"))
                 .map(Object::toString)
                 .ifPresentOrElse(msg -> {
                     HttpStatus forbidden = HttpStatus.FORBIDDEN;

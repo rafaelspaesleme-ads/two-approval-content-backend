@@ -5,8 +5,8 @@ import br.com.twoapprovalcontentbackend.entrypoint.dtos.requests.LoginRequest;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.responses.LoginResponse;
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.UserEvaluatorDocument;
 
-public class LoginBuilder extends AbstractFunctionsMapper<UserEvaluatorDocument, UserEvaluatorDocument, LoginResponse> {
-    public LoginBuilder(LoginRequest request) {
+public class LoginMapper extends AbstractFunctionsMapper<UserEvaluatorDocument, UserEvaluatorDocument, LoginResponse> {
+    public LoginMapper(LoginRequest request) {
         super.setInput(UserEvaluatorDocument.builder()
                         .id(request.evaluationKey())
                         .secret(request.secretId())

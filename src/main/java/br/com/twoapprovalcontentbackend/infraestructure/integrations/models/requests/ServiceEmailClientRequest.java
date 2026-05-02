@@ -1,6 +1,7 @@
 package br.com.twoapprovalcontentbackend.infraestructure.integrations.models.requests;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Map;
 
 public record ServiceEmailClientRequest(

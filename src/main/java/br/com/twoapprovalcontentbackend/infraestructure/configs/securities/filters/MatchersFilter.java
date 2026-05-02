@@ -18,7 +18,9 @@ public class MatchersFilter {
                 "/user/register",
                 "/user/register/**",
                 "/user/login",
-                "/user/login/**"
+                "/user/login/**",
+                "/author",
+                "/author/**"
         };
     }
 

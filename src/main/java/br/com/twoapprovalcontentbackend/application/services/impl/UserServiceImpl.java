@@ -1,6 +1,6 @@
 package br.com.twoapprovalcontentbackend.application.services.impl;
 
-import br.com.twoapprovalcontentbackend.application.mappers.users.LoginBuilder;
+import br.com.twoapprovalcontentbackend.application.mappers.users.LoginMapper;
 import br.com.twoapprovalcontentbackend.application.mappers.users.UserEvaludationRegisterMapper;
 import br.com.twoapprovalcontentbackend.application.services.UserService;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.requests.LoginRequest;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoginResponse login(LoginRequest request) {
 
-        LoginBuilder builder = new LoginBuilder(request);
+        LoginMapper builder = new LoginMapper(request);
 
         builder.setOutput(this.evaluatorGateway::login);
 
