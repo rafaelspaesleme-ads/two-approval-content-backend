@@ -3,7 +3,6 @@ package br.com.twoapprovalcontentbackend.infraestructure.configs.securities.fail
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessForbiddenException;
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.model.ApiErrorMessageResponse;
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.model.ApiErrorResponse;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
