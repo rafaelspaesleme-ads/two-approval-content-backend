@@ -1,0 +1,304 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-05-09T04:00:27.640Z",
+  "__export_source": "insomnia.desktop.app:v2022.7.0",
+  "resources": [
+    {
+      "_id": "req_97305581e2c24a7a8d2d33f62ce0b1fd",
+      "parentId": "fld_c6d509dd3c6647b9a08f3632ae2c6c74",
+      "modified": 1778299159390,
+      "created": 1778299081966,
+      "url": "http://localhost:8080/api/two-approval-content/user/login",
+      "name": "login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"evaluationKey\": \"{{ _.evaluationKey }}\",\n  \"secretId\": \"{{ _.secretId }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Cookie",
+          "value": "JSESSIONID=E822F14FF2644E9A839296B983499549"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778299045069,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_c6d509dd3c6647b9a08f3632ae2c6c74",
+      "parentId": "fld_5ba6d13bd4b64a959783927f4286bd6f",
+      "modified": 1778298960770,
+      "created": 1778298960770,
+      "name": "user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1778298960770,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_5ba6d13bd4b64a959783927f4286bd6f",
+      "parentId": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "modified": 1778298898478,
+      "created": 1778298898478,
+      "name": "content-approval-api",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1778298898478,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "parentId": null,
+      "modified": 1778299081968,
+      "created": 1778298701298,
+      "name": "Lives",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_f5c8a54ba7cb46e6851e5091c0194a76",
+      "parentId": "fld_c6d509dd3c6647b9a08f3632ae2c6c74",
+      "modified": 1778299119594,
+      "created": 1778299067017,
+      "url": "http://localhost:8080/api/two-approval-content/user/register",
+      "name": "register",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"fullname\": \"Caio Vitorino Faria\",\n  \"email\": \"caio.faria@geradornv.com.br\",\n  \"niche\": \"Health & Wellness\",\n  \"comments\": \"teste\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_718e1add318a4f1e8eaeb39344faf55d"
+        },
+        {
+          "name": "apiEvaluationKey",
+          "value": "{{ _.apiKey }}",
+          "id": "pair_4161daac34dc458d9d1597f8cfe48f97"
+        },
+        {
+          "name": "Cookie",
+          "value": "JSESSIONID=E822F14FF2644E9A839296B983499549",
+          "id": "pair_a80cef3c8ec74e3a8788a67f46f780a3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778299045019,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ddf5d8d1844f4c4c86b4bb9cdf1ab146",
+      "parentId": "fld_c6d509dd3c6647b9a08f3632ae2c6c74",
+      "modified": 1778299055034,
+      "created": 1778299044969,
+      "url": "http://localhost:8080/api/two-approval-content/user/niches",
+      "name": "niches",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Cookie",
+          "value": "JSESSIONID=E822F14FF2644E9A839296B983499549"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778299044969,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_303c55d105d048dcb14a0e5c758ef143",
+      "parentId": "fld_cdca6974ee444530acaec4a2c541c0c3",
+      "modified": 1778299175271,
+      "created": 1778299020034,
+      "url": "http://localhost:8080/api/two-approval-content/author/content/{{ _.contentId }}/find-status",
+      "name": "find-status",
+      "description": "",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "apiCreatorContentKey",
+          "value": "{{ _.apiContentKey }}",
+          "id": "pair_ab5a1e6439c04a73a82f55ecad15f15e"
+        },
+        {
+          "name": "Cookie",
+          "value": "JSESSIONID=E822F14FF2644E9A839296B983499549",
+          "id": "pair_c78ca802e06a415a8fa16e67f660cfb3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778298930061,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_cdca6974ee444530acaec4a2c541c0c3",
+      "parentId": "fld_5ba6d13bd4b64a959783927f4286bd6f",
+      "modified": 1778298908853,
+      "created": 1778298908853,
+      "name": "author",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1778298908853,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_91352a710c7745bdba818f3d8b681638",
+      "parentId": "fld_cdca6974ee444530acaec4a2c541c0c3",
+      "modified": 1778299190736,
+      "created": 1778298930011,
+      "url": "http://localhost:8080/api/two-approval-content/author/evaluate",
+      "name": "evaluate",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"fullname\": \"Rivaldo Ronaldo\",\n  \"title\": \"Barcelona por perde de 8 a 2.\",\n  \"content\": \"Em 2020, o Bayern Munich sofreu uma goleada do Barcelona por 8 a 2 pelas semifinais da Champions. O Arsenal também quebrou um jejum de 30 anos e foi campeão do campeonato argentino.\",\n  \"email\": \"rspleme.1989@gmail.com\",\n  \"niche\": \"TECHNOLOGY\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_668efd013f8244ee9aab44adec4c7a94"
+        },
+        {
+          "name": "apiCreatorContentKey",
+          "value": "{{ _.apiContentKey }}",
+          "id": "pair_d120bbb9d62f4b35bcfd5e328462acf3"
+        },
+        {
+          "name": "Cookie",
+          "value": "JSESSIONID=E822F14FF2644E9A839296B983499549",
+          "id": "pair_66036afc381c40fba2eb2e159a02a584"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778298930011,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_27b77bf83a3fc67f77c67eff9ada80be230635a6",
+      "parentId": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "modified": 1778298748393,
+      "created": 1778298701303,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": {},
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1778298701303,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_27b77bf83a3fc67f77c67eff9ada80be230635a6",
+      "parentId": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "modified": 1778298701305,
+      "created": 1778298701305,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_2d8f579588374244acb5c807acdafe7b",
+      "parentId": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "modified": 1778298701299,
+      "created": 1778298701299,
+      "fileName": "Lives",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_d5ecf0a6e65244f9ada4e176451c5dc1",
+      "parentId": "env_27b77bf83a3fc67f77c67eff9ada80be230635a6",
+      "modified": 1778298790810,
+      "created": 1778298750710,
+      "name": "content-approval-api",
+      "data": {
+        "baseUrl": "http://localhost:8080/api/two-approval-content",
+        "apiKey": "af7f3dce-7268-489d-baab-f8d02006c727",
+        "apiContentKey": "c0569186-1e09-4e9d-ad33-47c655d1f552",
+        "evaluationKey": "{% response 'body', 'req_d8efb47a2dbd443bba2471af729bc002', 'b64::JC5kYXRhLmV2YWx1YXRpb25LZXk=::46b', 'never', 60 %}",
+        "secretId": "{% response 'body', 'req_d8efb47a2dbd443bba2471af729bc002', 'b64::JC5kYXRhLnNlY3JldElk::46b', 'never', 60 %}",
+        "nicheTech": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlswXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+        "nicheHealth": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsxXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+        "nicheFit": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsyXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+        "nicheGamer": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsxMF0uZGVzY3JpcHRpb25Fbmc=::46b', 'never', 60 %}",
+        "contentId": "{% response 'body', 'req_baafb87a7f2a48d58d24ff9241080547', 'b64::JC5kYXRhLmNvbnRlbnRJZA==::46b', 'never', 60 %}"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseUrl",
+          "apiKey",
+          "apiContentKey",
+          "evaluationKey",
+          "secretId",
+          "nicheTech",
+          "nicheHealth",
+          "nicheFit",
+          "nicheGamer",
+          "contentId"
+        ]
+      },
+      "color": "#310acd",
+      "isPrivate": false,
+      "metaSortKey": 1778298750710,
+      "_type": "environment"
+    }
+  ]
+}
