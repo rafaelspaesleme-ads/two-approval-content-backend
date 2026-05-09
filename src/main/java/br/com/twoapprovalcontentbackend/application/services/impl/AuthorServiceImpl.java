@@ -1,6 +1,7 @@
 package br.com.twoapprovalcontentbackend.application.services.impl;
 
 import br.com.twoapprovalcontentbackend.application.mappers.authors.EvaluateContentMapper;
+import br.com.twoapprovalcontentbackend.application.mappers.authors.FindStatusEvaluationMapper;
 import br.com.twoapprovalcontentbackend.application.services.AuthorService;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.requests.EvaluateContentRequest;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.responses.EvaluateContentResponse;
@@ -22,14 +23,24 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public EvaluateContentResponse evaluate(EvaluateContentRequest request) {
 
-        EvaluateContentMapper builder = new EvaluateContentMapper(request);
+        EvaluateContentMapper mapper = new EvaluateContentMapper(request);
 
-        builder.findUserEvaluation(this.contentGateway::getUserEvaluation);
+        mapper.findUserEvaluation(this.contentGateway::getUserEvaluation);
 
-        builder.setOutput(this.contentGateway::save);
+        mapper.setOutput(this.contentGateway::save);
 
-        builder.setEvaluationContent(this.aiGateway::evaluationContent);
+        mapper.setEvaluationContent(this.aiGateway::evaluationContent);
 
-        return builder.getBuild();
+        return mapper.getBuild();
+    }
+
+    @Override
+    public EvaluateContentResponse findStatus(String contentId) {
+
+        FindStatusEvaluationMapper mapper = new FindStatusEvaluationMapper(contentId);
+
+        mapper.setOutput(this.contentGateway::findAndUpdateFlagFindStatus);
+
+        return mapper.getBuild();
     }
 }

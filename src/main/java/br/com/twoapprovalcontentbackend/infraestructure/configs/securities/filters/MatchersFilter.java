@@ -29,7 +29,10 @@ public class MatchersFilter {
     }
 
     public static String[] getPatchs() {
-        return new String[] {};
+        return new String[] {
+                "/author",
+                "/author/**"
+        };
     }
 
     public static String[] getDeletes() {

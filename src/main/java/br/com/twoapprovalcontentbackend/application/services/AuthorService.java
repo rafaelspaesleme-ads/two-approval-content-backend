@@ -5,4 +5,6 @@ import br.com.twoapprovalcontentbackend.entrypoint.dtos.responses.EvaluateConten
 
 public interface AuthorService {
     EvaluateContentResponse evaluate(EvaluateContentRequest request);
+
+    EvaluateContentResponse findStatus(String contentId);
 }

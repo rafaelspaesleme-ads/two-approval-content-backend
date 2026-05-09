@@ -32,4 +32,17 @@ public class AuthorControllerImpl extends ResponseControllerImpl implements Auth
                 servletRequest
         );
     }
+
+    @Override
+    public ResponseEntity<ApiResponse<EvaluateContentResponse>> findStatus(String contentId, HttpServletRequest servletRequest) {
+
+        EvaluateContentResponse response = service.findStatus(contentId);
+
+        return super.setOk(
+                response,
+                "Status da analise.",
+                Collections.singletonList("Status da analise retornado com sucesso!"),
+                servletRequest
+        );
+    }
 }

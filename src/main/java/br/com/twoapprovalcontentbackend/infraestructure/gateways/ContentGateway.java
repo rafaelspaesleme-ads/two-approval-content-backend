@@ -8,4 +8,6 @@ public interface ContentGateway {
     UserEvaluatorDocument getUserEvaluation(NichesEnum niche);
 
     ContentDocument save(ContentDocument document);
+
+    ContentDocument findAndUpdateFlagFindStatus(String contentId);
 }

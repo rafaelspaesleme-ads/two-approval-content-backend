@@ -21,9 +21,9 @@
 
 - 09º Live: Criação do serviço (endpoint) de envio de conteúdo (criador de conteúdo) - ok
 
-- 10º Live: Criação do serviço (endpoint) de verificar status do conteúdo (findStatus)
+- 10º Live: Criação do serviço (endpoint) de verificar status do conteúdo (findStatus) - ok
 
-- 11º Live: Criação do serviço de (endpoint) consulta de conteúdos destinados a um avaliador
+- 11º Live: Criação do serviço de (endpoint) consulta de conteúdos para avaliador analisar
 
 - 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation)
 
@@ -35,6 +35,10 @@
 
 - 16º Live: Criação de testes unitários
 
-- 17º Live: Criação de testes de integração
+- 17º Live: Realização de testes de integração
 
-- 18º Live de fechamento: Documentação e analises da API (Plus: Apresentar o novo projeto)
+- 18º Live: Criação do Dockerfile da API
+
+- 19º Live: Deploy da API
+
+- 20º Live de fechamento: Documentação e analises da API (Plus: Apresentação o novo projeto)

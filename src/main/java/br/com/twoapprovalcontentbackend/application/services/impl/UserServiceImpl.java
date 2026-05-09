@@ -22,20 +22,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserRegisterResponse register(UserRegisterRequest request) {
 
-        UserEvaludationRegisterMapper builder = new UserEvaludationRegisterMapper(request);
+        UserEvaludationRegisterMapper mapper = new UserEvaludationRegisterMapper(request);
 
-        builder.setOutput(this.evaluatorGateway::register);
+        mapper.setOutput(this.evaluatorGateway::register);
 
-        return builder.getBuild();
+        return mapper.getBuild();
     }
 
     @Override
     public LoginResponse login(LoginRequest request) {
 
-        LoginMapper builder = new LoginMapper(request);
+        LoginMapper mapper = new LoginMapper(request);
 
-        builder.setOutput(this.evaluatorGateway::login);
+        mapper.setOutput(this.evaluatorGateway::login);
 
-        return builder.getBuild();
+        return mapper.getBuild();
     }
 }

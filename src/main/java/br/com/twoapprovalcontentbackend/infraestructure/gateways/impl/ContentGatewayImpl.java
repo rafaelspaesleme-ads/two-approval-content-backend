@@ -31,4 +31,15 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
     public ContentDocument save(ContentDocument document) {
         return this.repository.save(super.create(document));
     }
+
+    @Override
+    public ContentDocument findAndUpdateFlagFindStatus(String contentId) {
+
+        ContentDocument contentDocument = this.repository.findById(contentId)
+                .orElseThrow(() -> new BusinessNotFoundException("Conteúdo não encontrado"));
+
+        contentDocument.setFlagFindStatus(true);
+
+        return this.repository.save(super.refresh(contentDocument));
+    }
 }
