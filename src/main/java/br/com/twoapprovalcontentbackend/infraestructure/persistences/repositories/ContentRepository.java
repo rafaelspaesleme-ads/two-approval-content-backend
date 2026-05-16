@@ -4,6 +4,9 @@ import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.Cont
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ContentRepository extends MongoRepository<ContentDocument, String> {
+    List<ContentDocument> findAllByEvaluationKeyOrderByCreatedAtAsc(String evaluationKey);
 }

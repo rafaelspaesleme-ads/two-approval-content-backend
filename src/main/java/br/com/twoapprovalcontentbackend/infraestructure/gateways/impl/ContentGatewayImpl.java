@@ -3,13 +3,17 @@ package br.com.twoapprovalcontentbackend.infraestructure.gateways.impl;
 import br.com.twoapprovalcontentbackend.infraestructure.enums.NichesEnum;
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessNotFoundException;
 import br.com.twoapprovalcontentbackend.infraestructure.gateways.ContentGateway;
+import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.AIResponseDocument;
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.ContentDocument;
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.UserEvaluatorDocument;
+import br.com.twoapprovalcontentbackend.infraestructure.persistences.repositories.AIResponseRepository;
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.repositories.ContentRepository;
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.repositories.UserEvaluatorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -18,6 +22,7 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
 
     private final ContentRepository repository;
     private final UserEvaluatorRepository userEvaluatorRepository;
+    private final AIResponseRepository aiResponseRepository;
 
     @Override
     public UserEvaluatorDocument getUserEvaluation(NichesEnum niche) {
@@ -41,5 +46,15 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
         contentDocument.setFlagFindStatus(true);
 
         return this.repository.save(super.refresh(contentDocument));
+    }
+
+    @Override
+    public List<ContentDocument> searchContent(String evaluationKey) {
+        return this.repository.findAllByEvaluationKeyOrderByCreatedAtAsc(evaluationKey);
+    }
+
+    @Override
+    public List<AIResponseDocument> searchAiResponse(String evaluationKey) {
+        return this.aiResponseRepository.findAllByEvaluationKeyOrderByCreatedAtAsc(evaluationKey);
     }
 }

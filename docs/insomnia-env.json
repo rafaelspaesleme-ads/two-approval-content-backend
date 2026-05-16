@@ -2,11 +2,12 @@
 	"baseUrl": "http://localhost:8080/api/two-approval-content",
 	"apiKey": "af7f3dce-7268-489d-baab-f8d02006c727",
 	"apiContentKey": "c0569186-1e09-4e9d-ad33-47c655d1f552",
-	"evaluationKey": "{% response 'body', 'req_d8efb47a2dbd443bba2471af729bc002', 'b64::JC5kYXRhLmV2YWx1YXRpb25LZXk=::46b', 'never', 60 %}",
-	"secretId": "{% response 'body', 'req_d8efb47a2dbd443bba2471af729bc002', 'b64::JC5kYXRhLnNlY3JldElk::46b', 'never', 60 %}",
-	"nicheTech": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlswXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
-	"nicheHealth": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsxXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
-	"nicheFit": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsyXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
-	"nicheGamer": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsxMF0uZGVzY3JpcHRpb25Fbmc=::46b', 'never', 60 %}",
-	"contentId": "{% response 'body', 'req_baafb87a7f2a48d58d24ff9241080547', 'b64::JC5kYXRhLmNvbnRlbnRJZA==::46b', 'never', 60 %}"
+	"evaluationKey": "{% response 'body', 'req_f5c8a54ba7cb46e6851e5091c0194a76', 'b64::JC5kYXRhLmV2YWx1YXRpb25LZXk=::46b', 'never', 60 %}",
+	"secretId": "{% response 'body', 'req_f5c8a54ba7cb46e6851e5091c0194a76', 'b64::JC5kYXRhLnNlY3JldElk::46b', 'never', 60 %}",
+	"nicheTech": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlswXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+	"nicheHealth": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsxXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+	"nicheFit": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsyXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+	"nicheGamer": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsxMF0uZGVzY3JpcHRpb25Fbmc=::46b', 'never', 60 %}",
+	"contentId": "{% response 'body', 'req_91352a710c7745bdba818f3d8b681638', 'b64::JC5kYXRhLmNvbnRlbnRJZA==::46b', 'never', 60 %}",
+	"token": "Bearer {% response 'body', 'req_97305581e2c24a7a8d2d33f62ce0b1fd', 'b64::JC5kYXRhLnRva2Vu::46b', 'never', 60 %}"
 }

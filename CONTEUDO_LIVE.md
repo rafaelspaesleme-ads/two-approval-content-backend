@@ -23,7 +23,7 @@
 
 - 10º Live: Criação do serviço (endpoint) de verificar status do conteúdo (findStatus) - ok
 
-- 11º Live: Criação do serviço de (endpoint) consulta de conteúdos para avaliador analisar
+- 11º Live: Criação do serviço de (endpoint) consulta de conteúdos para avaliador analisar - ok
 
 - 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation)
 

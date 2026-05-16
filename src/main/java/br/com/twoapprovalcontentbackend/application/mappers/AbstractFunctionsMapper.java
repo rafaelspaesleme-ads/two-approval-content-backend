@@ -45,6 +45,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
 
     protected I[] multiInput;
 
+    @Getter
     protected List<O> outputList;
 
     protected Page<O> outputPage;
@@ -74,7 +75,7 @@ public abstract class AbstractFunctionsMapper<I, O, R> {
         return this.mapper.convertValue(this.output, this.destinationResponseClass);
     }
 
-    protected List<R> getBuildList() {
+    public List<R> getBuildList() {
         if (CollectionUtils.isEmpty(this.outputList)) return Collections.emptyList();
         return this.outputList.stream().map(o -> this.mapper.convertValue(o, this.destinationResponseClass)).toList();
     }
