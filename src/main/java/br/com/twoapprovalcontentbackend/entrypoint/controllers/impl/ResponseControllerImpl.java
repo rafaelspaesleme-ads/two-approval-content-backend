@@ -30,6 +30,11 @@ public abstract class ResponseControllerImpl {
     protected <T> ResponseEntity<ApiResponse<T>> setOk(T data, String title, List<String> lsMessage, HttpServletRequest request) {
         return this.setOk(data, title, lsMessage, request, null);
     }
+
+    protected <T> ResponseEntity<ApiResponse<T>> setVoidOk(String title, List<String> lsMessage, HttpServletRequest request) {
+        return this.setOk(null, title, lsMessage, request, null);
+    }
+
     protected <T> ResponseEntity<ApiResponse<T>> setOk(T data, String title, List<String> lsMessage, HttpServletRequest request, Object metadata) {
 
         HttpStatus status = HttpStatus.OK;

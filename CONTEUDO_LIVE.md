@@ -25,7 +25,7 @@
 
 - 11º Live: Criação do serviço de (endpoint) consulta de conteúdos para avaliador analisar - ok
 
-- 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation)
+- 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation) - ok
 
 - 13º Live: Criação do serviço de envio de notificações de avaliações concluídas
 

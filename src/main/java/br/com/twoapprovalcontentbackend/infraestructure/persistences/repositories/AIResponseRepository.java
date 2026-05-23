@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface AIResponseRepository extends MongoRepository<AIResponseDocument, String> {
     List<AIResponseDocument> findAllByEvaluationKeyOrderByCreatedAtAsc(String evaluationKey);
+
+    long deleteByContentIdAndEvaluationKey(String contentId, String evaluationKey);
 }

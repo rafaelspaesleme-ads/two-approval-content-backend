@@ -1,6 +1,7 @@
 package br.com.twoapprovalcontentbackend.infraestructure.gateways.impl;
 
 import br.com.twoapprovalcontentbackend.infraestructure.enums.NichesEnum;
+import br.com.twoapprovalcontentbackend.infraestructure.enums.StatusEvaluationEnum;
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessNotFoundException;
 import br.com.twoapprovalcontentbackend.infraestructure.gateways.ContentGateway;
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.models.AIResponseDocument;
@@ -40,8 +41,7 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
     @Override
     public ContentDocument findAndUpdateFlagFindStatus(String contentId) {
 
-        ContentDocument contentDocument = this.repository.findById(contentId)
-                .orElseThrow(() -> new BusinessNotFoundException("Conteúdo não encontrado"));
+        ContentDocument contentDocument = this.findContentById(contentId);
 
         contentDocument.setFlagFindStatus(true);
 
@@ -50,11 +50,27 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
 
     @Override
     public List<ContentDocument> searchContent(String evaluationKey) {
-        return this.repository.findAllByEvaluationKeyOrderByCreatedAtAsc(evaluationKey);
+        return repository.findAllByEvaluationKeyAndStatusOrderByCreatedAtAsc(evaluationKey, StatusEvaluationEnum.IN_REVIEW);
     }
 
     @Override
     public List<AIResponseDocument> searchAiResponse(String evaluationKey) {
         return this.aiResponseRepository.findAllByEvaluationKeyOrderByCreatedAtAsc(evaluationKey);
+    }
+
+    @Override
+    public ContentDocument findContentById(String contentId) {
+        return this.repository.findById(contentId)
+                .orElseThrow(() -> new BusinessNotFoundException("Conteúdo não encontrado"));
+    }
+
+    @Override
+    public void sendEvaluation(ContentDocument document) {
+        this.repository.save(super.refresh(document));
+    }
+
+    @Override
+    public void removeEvaluationAI(String contentId, String evaluationKey) {
+        this.aiResponseRepository.deleteByContentIdAndEvaluationKey(contentId, evaluationKey);
     }
 }

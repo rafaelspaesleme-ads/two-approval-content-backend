@@ -1,7 +1,9 @@
 package br.com.twoapprovalcontentbackend.application.services.impl;
 
 import br.com.twoapprovalcontentbackend.application.mappers.evaluations.InfosEvaluationMapper;
+import br.com.twoapprovalcontentbackend.application.mappers.evaluations.SendEvaluationMapper;
 import br.com.twoapprovalcontentbackend.application.services.EvaluationHumanService;
+import br.com.twoapprovalcontentbackend.entrypoint.dtos.requests.SendEvaluationRequest;
 import br.com.twoapprovalcontentbackend.entrypoint.dtos.responses.InfosEvaluationResponse;
 import br.com.twoapprovalcontentbackend.infraestructure.gateways.ContentGateway;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +29,18 @@ public class EvaluationHumanServiceImpl implements EvaluationHumanService {
         mapper.setOutputList(this.gateway::searchAiResponse);
 
         return mapper.getBuildList();
+    }
+
+    @Override
+    public void sendEvaluation(SendEvaluationRequest request) {
+
+        SendEvaluationMapper mapper = new SendEvaluationMapper(request);
+
+        mapper.findContentById(this.gateway::findContentById);
+
+        mapper.setVoid(this.gateway::sendEvaluation);
+
+        mapper.removeEvaluationAI(this.gateway::removeEvaluationAI);
+
     }
 }

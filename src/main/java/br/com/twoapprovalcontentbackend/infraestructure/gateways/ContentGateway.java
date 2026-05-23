@@ -17,4 +17,10 @@ public interface ContentGateway {
     List<ContentDocument> searchContent(String evaluationKey);
 
     List<AIResponseDocument> searchAiResponse(String evaluationKey);
+
+    ContentDocument findContentById(String contentId);
+
+    void sendEvaluation(ContentDocument document);
+
+    void removeEvaluationAI(String contentId, String evaluationKey);
 }
