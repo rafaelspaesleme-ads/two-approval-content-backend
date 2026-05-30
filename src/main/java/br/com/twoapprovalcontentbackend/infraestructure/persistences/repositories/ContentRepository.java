@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface ContentRepository extends MongoRepository<ContentDocument, String> {
     List<ContentDocument> findAllByEvaluationKeyAndStatusOrderByCreatedAtAsc(String evaluationKey, StatusEvaluationEnum status);
+
+    List<ContentDocument> findAllByFlagNotificationFalseOrFlagNotificationNull();
 }

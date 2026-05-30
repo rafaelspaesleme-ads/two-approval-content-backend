@@ -44,5 +44,4 @@ public class ContentDocument extends AuditEntity {
     private String justificationFailSendNotifiction;
 
     private String justificationEvaluation;
-
 }

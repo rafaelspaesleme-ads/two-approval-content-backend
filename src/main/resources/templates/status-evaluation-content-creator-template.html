@@ -215,6 +215,12 @@
             font-weight: 600;
         }
 
+        .detail-logs {
+            color: #850b0b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
         /* Feedback adicional */
         .feedback-box {
             background-color: #FFFFFF;
@@ -437,6 +443,10 @@
             <div class="detail-item">
                 <span class="detail-label">Tempo de Análise:</span>
                 <span class="detail-value" th:text="${timeAnalysis}">2 dias</span>
+            </div>
+            <div th:if="${logs != null}" class="detail-item">
+                <span class="detail-label">Logs:</span>
+                <span class="detail-logs" th:text="${logs}">Erro ao tentar enviar para webhook.</span>
             </div>
         </div>
 

@@ -27,7 +27,7 @@
 
 - 12º Live: Criação do serviço de envio de valiação humana do conteúdo (sendEvaluation) - ok
 
-- 13º Live: Criação do serviço de envio de notificações de avaliações concluídas
+- 13º Live: Criação do serviço de envio de notificações de avaliações concluídas - ok
 
 - 14º Live: Criação do serviço de deletar avaliações já concluídas e enviadas para o criador de conteúdo
 
