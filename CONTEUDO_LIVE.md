@@ -29,7 +29,7 @@
 
 - 13º Live: Criação do serviço de envio de notificações de avaliações concluídas - ok
 
-- 14º Live: Criação do serviço de deletar avaliações já concluídas e enviadas para o criador de conteúdo
+- 14º Live: Criação do serviço de deletar avaliações já concluídas e enviadas para o criador de conteúdo - ok
 
 - 15º Live: Configurações do Swagger
 
