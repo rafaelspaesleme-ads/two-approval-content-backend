@@ -41,6 +41,8 @@ public class ContentDocument extends AuditEntity {
 
     private Boolean flagNotification;
 
+    private Boolean flagViewStattusJustificationFailSendNotification;
+
     private String justificationFailSendNotifiction;
 
     private String justificationEvaluation;

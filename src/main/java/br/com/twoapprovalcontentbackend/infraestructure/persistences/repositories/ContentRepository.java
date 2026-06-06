@@ -12,4 +12,6 @@ public interface ContentRepository extends MongoRepository<ContentDocument, Stri
     List<ContentDocument> findAllByEvaluationKeyAndStatusOrderByCreatedAtAsc(String evaluationKey, StatusEvaluationEnum status);
 
     List<ContentDocument> findAllByFlagNotificationFalseOrFlagNotificationNull();
+
+    List<ContentDocument> findAllByFlagFindStatusTrueAndFlagNotificationTrue();
 }

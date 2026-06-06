@@ -46,8 +46,8 @@ public class NotificationSchedule extends PersistGatewayImpl {
 
     private final ServiceMailClient serviceMailClient;
 
-    //@Scheduled(cron = "0 0 3 * * *") //--> todos os dias as 3h da manhã
-    @Scheduled(cron = "0 */2 * * * *") //--> a cada 2 minutos
+    //@Scheduled(cron = "0 */2 * * * *") //--> a cada 2 minutos
+    @Scheduled(cron = "0 0 3 * * *") //--> todos os dias as 3h da manhã
     public void runTask() {
 
         List<ContentDocument> contents = repository.findAllByFlagNotificationFalseOrFlagNotificationNull()

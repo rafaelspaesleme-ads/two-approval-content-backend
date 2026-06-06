@@ -12,6 +12,7 @@ import br.com.twoapprovalcontentbackend.infraestructure.persistences.repositorie
 import br.com.twoapprovalcontentbackend.infraestructure.persistences.repositories.UserEvaluatorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -44,6 +45,10 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
         ContentDocument contentDocument = this.findContentById(contentId);
 
         contentDocument.setFlagFindStatus(true);
+
+        if (StringUtils.isNotEmpty(contentDocument.getJustificationFailSendNotifiction())) {
+            contentDocument.setFlagViewStattusJustificationFailSendNotification(true);
+        }
 
         return this.repository.save(super.refresh(contentDocument));
     }
