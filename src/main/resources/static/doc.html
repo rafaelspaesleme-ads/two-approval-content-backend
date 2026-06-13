@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Documentação de funcionalidades da API</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --panel: #121a31;
+            --panel-2: #0f1730;
+            --text: #e8ecf7;
+            --muted: #a9b3d1;
+            --line: #263253;
+            --accent: #7aa2ff;
+            --accent-2: #84e1bc;
+            --warn: #ffd36e;
+            --danger: #ff8a8a;
+            --code: #0a1228;
+        }
+        html, body { background: linear-gradient(180deg, #09101f 0%, #0d1528 100%); color: var(--text); font-family: Inter, Segoe UI, Roboto, Arial, sans-serif; margin: 0; }
+        .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 48px; }
+        .hero { background: linear-gradient(135deg, rgba(122,162,255,.18), rgba(132,225,188,.08)); border: 1px solid var(--line); border-radius: 22px; padding: 28px; box-shadow: 0 18px 40px rgba(0,0,0,.24); }
+        h1 { margin: 0 0 8px; font-size: 2rem; line-height: 1.15; }
+        h2 { margin: 34px 0 12px; font-size: 1.35rem; }
+        h3 { margin: 22px 0 10px; font-size: 1.05rem; color: #fff; }
+        p, li { color: var(--text); line-height: 1.65; }
+        .muted { color: var(--muted); }
+        .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+        .chip { padding: 8px 12px; border:1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); color: var(--muted); font-size: .92rem; }
+        .section { background: rgba(18,26,49,.76); border:1px solid var(--line); border-radius: 20px; padding: 22px; margin-top: 18px; }
+        table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 14px; }
+        th, td { border-bottom: 1px solid var(--line); padding: 12px 10px; vertical-align: top; text-align: left; }
+        th { background: rgba(255,255,255,.04); color: #fff; font-weight: 700; font-size: .94rem; }
+        tr:hover td { background: rgba(255,255,255,.02); }
+        code, pre { background: var(--code); color: #d7e3ff; border: 1px solid #1d2a4d; border-radius: 14px; }
+        code { padding: 2px 6px; }
+        pre { padding: 16px; overflow:auto; }
+        ul { margin: 8px 0 0 20px; }
+        .note { border-left: 4px solid var(--accent); padding: 12px 14px; background: rgba(122,162,255,.08); border-radius: 10px; }
+        .warn { border-left: 4px solid var(--warn); background: rgba(255,211,110,.08); }
+        .danger { border-left: 4px solid var(--danger); background: rgba(255,138,138,.08); }
+        .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .kpi { background: rgba(255,255,255,.04); border:1px solid var(--line); border-radius: 18px; padding: 16px; }
+        .small { font-size: .93rem; }
+        .footer { margin-top: 22px; color: var(--muted); font-size: .92rem; }
+        @media (max-width: 820px) {
+            .grid { grid-template-columns: 1fr; }
+            .wrap { padding: 18px 14px 28px; }
+            .hero, .section { border-radius: 18px; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <section class="hero">
+        <h1>Documentação de funcionalidades da API</h1>
+        <p class="muted">Projeto <strong>two-approval-content-backend</strong>, baseado em Spring Boot 3.5, Java 21, MongoDB, Spring Security, integração com DeepSeek e envio por e-mail/webhook.</p>
+        <div class="chips">
+            <span class="chip">Base path: /api/two-approval-content</span>
+            <span class="chip">Swagger: /swagger-ui.html</span>
+            <span class="chip">API docs: /v3/api-docs</span>
+            <span class="chip">Autenticação: JWT + API keys</span>
+            <span class="chip">Banco: MongoDB</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Visão geral</h2>
+        <p>Esta API implementa um fluxo de aprovação de conteúdo em duas etapas: primeiro a análise automática por IA e, depois, a avaliação humana. O conteúdo é persistido no banco, a resposta da IA é gravada como referência técnica e o avaliador humano pode consultar e finalizar a decisão.</p>
+        <p>O contrato de resposta da aplicação usa o wrapper <code>ApiResponse&lt;T&gt;</code>, com os campos <code>responseId</code>, <code>data</code>, <code>title</code>, <code>lsMessage</code>, <code>local</code>, <code>timestamp</code> e <code>metadata</code>.</p>
+    </section>
+
+    <section class="section">
+        <h2>Fluxo funcional principal</h2>
+        <div class="grid">
+            <div class="kpi">
+                <h3>1. Cadastro do avaliador</h3>
+                <p class="small">O avaliador humano se registra com nome, e-mail, nicho e comentários. O sistema cria a <code>evaluationKey</code> e a <code>secretId</code>.</p>
+            </div>
+            <div class="kpi">
+                <h3>2. Login do avaliador</h3>
+                <p class="small">Com <code>evaluationKey</code> e <code>secretId</code>, o sistema gera um JWT e define a janela de login.</p>
+            </div>
+            <div class="kpi">
+                <h3>3. Submissão de conteúdo</h3>
+                <p class="small">O criador envia título, conteúdo, e-mail, nicho e, opcionalmente, um webhook de notificação.</p>
+            </div>
+            <div class="kpi">
+                <h3>4. AI + revisão humana</h3>
+                <p class="small">O conteúdo entra em <code>IN_REVIEW</code>, a IA gera uma avaliação e o humano finaliza o status com justificativa.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>End points e responsabilidades</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Método e rota</th>
+                <th>Finalidade</th>
+                <th>Autenticação / cabeçalhos</th>
+                <th>Entrada / saída</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>Usuários</td>
+                <td><strong>GET</strong><br><code>/api/two-approval-content/user/niches</code></td>
+                <td>Lista os nichos disponíveis para cadastro de avaliadores.</td>
+                <td>Sem Bearer. Endpoint público.</td>
+                <td><strong>Entrada:</strong> Nenhum body.<br><strong>Saída:</strong> ApiResponse&lt;List&lt;NichesEnum&gt;&gt;<br><span class="muted">Retorna os nichos cadastrados em enum (ex.: TECHNOLOGY, HEALTH_WELLNESS, TRAVEL, POLITICS, GENERATIVE_AI, etc.).</span></td>
+            </tr>
+            <tr>
+                <td>Usuários</td>
+                <td><strong>POST</strong><br><code>/api/two-approval-content/user/register</code></td>
+                <td>Registra um avaliador humano e gera sua chave secreta.</td>
+                <td>Header apiEvaluationKey obrigatório quando não houver Bearer.</td>
+                <td><strong>Entrada:</strong> UserRegisterRequest<br><strong>Saída:</strong> ApiResponse&lt;UserRegisterResponse&gt;<br><span class="muted">Cria o avaliador com secretId gerado internamente e retorna evaluationKey + secretId.</span></td>
+            </tr>
+            <tr>
+                <td>Usuários</td>
+                <td><strong>POST</strong><br><code>/api/two-approval-content/user/login</code></td>
+                <td>Autentica o avaliador e emite token JWT.</td>
+                <td>Endpoint público.</td>
+                <td><strong>Entrada:</strong> LoginRequest<br><strong>Saída:</strong> ApiResponse&lt;LoginResponse&gt;<br><span class="muted">Retorna evaluationKey, token, initialLoginAt e expiresLoginAt.</span></td>
+            </tr>
+            <tr>
+                <td>Autor / Conteúdo</td>
+                <td><strong>POST</strong><br><code>/api/two-approval-content/author/evaluate</code></td>
+                <td>Envia conteúdo para análise por IA e abre o fluxo de aprovação.</td>
+                <td>Header apiCreatorContentKey obrigatório quando não houver Bearer.</td>
+                <td><strong>Entrada:</strong> EvaluateContentRequest<br><strong>Saída:</strong> ApiResponse&lt;EvaluateContentResponse&gt;<br><span class="muted">Salva o conteúdo com status IN_REVIEW e gera avaliação de IA vinculada ao nicho.</span></td>
+            </tr>
+            <tr>
+                <td>Autor / Conteúdo</td>
+                <td><strong>PATCH</strong><br><code>/api/two-approval-content/author/content/{contentId}/find-status</code></td>
+                <td>Marca a visualização do status do conteúdo pelo criador.</td>
+                <td>Header apiCreatorContentKey obrigatório quando não houver Bearer.</td>
+                <td><strong>Entrada:</strong> Path variable contentId<br><strong>Saída:</strong> ApiResponse&lt;EvaluateContentResponse&gt;<br><span class="muted">Atualiza flags internas de leitura do status e, quando aplicável, da justificativa de falha de notificação.</span></td>
+            </tr>
+            <tr>
+                <td>Avaliação humana</td>
+                <td><strong>GET</strong><br><code>/api/two-approval-content/evaluation-human/contents/search?evaluationKey={evaluationKey}</code></td>
+                <td>Lista conteúdos pendentes de avaliação humana para o nicho do avaliador.</td>
+                <td>Authorization: Bearer &lt;token&gt;.</td>
+                <td><strong>Entrada:</strong> Query param evaluationKey<br><strong>Saída:</strong> ApiResponse&lt;List&lt;InfosEvaluationResponse&gt;&gt;<br><span class="muted">Retorna conteúdo em revisão junto com a avaliação de IA associada, quando existir.</span></td>
+            </tr>
+            <tr>
+                <td>Avaliação humana</td>
+                <td><strong>POST</strong><br><code>/api/two-approval-content/evaluation-human/send-content-evaluation</code></td>
+                <td>Grava a avaliação final feita por um humano.</td>
+                <td>Authorization: Bearer &lt;token&gt;.</td>
+                <td><strong>Entrada:</strong> SendEvaluationRequest<br><strong>Saída:</strong> ApiResponse&lt;Void&gt;<br><span class="muted">Atualiza o status final do conteúdo, grava justificativa e remove a avaliação de IA vinculada ao item.</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section">
+        <h2>Modelos de entrada</h2>
+        <h3>EvaluateContentRequest</h3>
+        <pre>{
+  &quot;fullname&quot;: &quot;Nome do criador&quot;,
+  &quot;title&quot;: &quot;Título do conteúdo&quot;,
+  &quot;content&quot;: &quot;Texto a ser analisado&quot;,
+  &quot;email&quot;: &quot;criador@exemplo.com&quot;,
+  &quot;niche&quot;: &quot;TECHNOLOGY&quot;,
+  &quot;notification&quot;: {
+    &quot;url&quot;: &quot;https://exemplo.com/webhook&quot;,
+    &quot;httpMethod&quot;: &quot;POST&quot;
+  }
+}</pre>
+
+        <h3>SendEvaluationRequest</h3>
+        <pre>{
+  &quot;evaluationKey&quot;: &quot;key-do-avaliador&quot;,
+  &quot;contentId&quot;: &quot;id-do-conteudo&quot;,
+  &quot;status&quot;: &quot;APPROVED&quot;,
+  &quot;justification&quot;: &quot;Conteúdo adequado ao nicho.&quot;
+}</pre>
+
+        <h3>UserRegisterRequest</h3>
+        <pre>{
+  &quot;fullname&quot;: &quot;Avaliador Humano&quot;,
+  &quot;email&quot;: &quot;avaliador@exemplo.com&quot;,
+  &quot;niche&quot;: &quot;TECHNOLOGY&quot;,
+  &quot;comments&quot;: &quot;Experiência com revisão editorial&quot;
+}</pre>
+
+        <h3>LoginRequest</h3>
+        <pre>{
+  &quot;evaluationKey&quot;: &quot;evaluation-key&quot;,
+  &quot;secretId&quot;: &quot;secret-id&quot;
+}</pre>
+    </section>
+
+    <section class="section">
+        <h2>Regras de negócio identificadas no código</h2>
+        <ul>
+            <li>O conteúdo entra inicialmente com status <code>IN_REVIEW</code>.</li>
+            <li>O fluxo de AI grava uma resposta em separado, vinculada ao conteúdo e à <code>evaluationKey</code> do nicho.</li>
+            <li>O retorno de status do autor inclui o identificador do conteúdo, o status e a descrição do status.</li>
+            <li>Se existir falha ao enviar notificação, a API também preserva a justificativa da falha para exibição posterior.</li>
+            <li>Na avaliação humana final, a avaliação de IA associada ao conteúdo é removida da base.</li>
+            <li>O endpoint de consulta humana lista apenas conteúdos em revisão e ordenados pela data de criação.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>Segurança observada</h2>
+        <ul>
+            <li><code>/user/login</code>, <code>/user/niches</code> e a documentação Swagger são públicos.</li>
+            <li><code>/user/register</code> exige o cabeçalho <code>apiEvaluationKey</code> quando a requisição não vai com Bearer token.</li>
+            <li><code>/author/**</code> exige o cabeçalho <code>apiCreatorContentKey</code> quando não há Bearer token.</li>
+            <li><code>/evaluation-human/**</code> depende de autenticação <code>Bearer</code> com JWT.</li>
+        </ul>
+    </section>
+
+    <p class="footer">Documentação detalhada de funcionalidades da API.</p>
+
+</div>
+</body>
+</html>

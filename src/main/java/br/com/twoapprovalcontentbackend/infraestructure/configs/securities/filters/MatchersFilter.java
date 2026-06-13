@@ -51,7 +51,8 @@ public class MatchersFilter {
                 "/swagger-ui/**",
                 "/v3/api-docs/**",
                 "/license.html",
-                "/docs.html"
+                "/term.html",
+                "/doc.html"
         };
     }
 

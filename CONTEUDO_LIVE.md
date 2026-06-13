@@ -31,7 +31,7 @@
 
 - 14º Live: Criação do serviço de deletar avaliações já concluídas e enviadas para o criador de conteúdo - ok
 
-- 15º Live: Configurações do Swagger
+- 15º Live: Configurações do Swagger - ok
 
 - 16º Live: Criação de testes unitários
 

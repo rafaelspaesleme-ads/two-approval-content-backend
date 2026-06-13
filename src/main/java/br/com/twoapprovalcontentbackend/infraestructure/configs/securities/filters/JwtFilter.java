@@ -2,6 +2,7 @@ package br.com.twoapprovalcontentbackend.infraestructure.configs.securities.filt
 
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.services.ConfigUserDetailsService;
 import br.com.twoapprovalcontentbackend.infraestructure.configs.securities.services.JwtService;
+import br.com.twoapprovalcontentbackend.infraestructure.enums.HttpHeadersKeyEnum;
 import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessForbiddenException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -37,8 +38,8 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-        String evaluationKey = request.getHeader("apiEvaluationKey");
-        String creatorContentKey = request.getHeader("apiCreatorContentKey");
+        String evaluationKey = request.getHeader(HttpHeadersKeyEnum.API_EVALUATION_KEY.getKey());
+        String creatorContentKey = request.getHeader(HttpHeadersKeyEnum.API_CREATOR_CONTENT_KEY.getKey());
 
         if (Objects.isNull(authorization) || !authorization.startsWith("Bearer ")) {
 

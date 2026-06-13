@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Termos de serviço</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --panel: #121a31;
+            --panel-2: #0f1730;
+            --text: #e8ecf7;
+            --muted: #a9b3d1;
+            --line: #263253;
+            --accent: #7aa2ff;
+            --accent-2: #84e1bc;
+            --warn: #ffd36e;
+            --danger: #ff8a8a;
+            --code: #0a1228;
+        }
+        html, body { background: linear-gradient(180deg, #09101f 0%, #0d1528 100%); color: var(--text); font-family: Inter, Segoe UI, Roboto, Arial, sans-serif; margin: 0; }
+        .wrap { max-width: 1120px; margin: 0 auto; padding: 32px 20px 48px; }
+        .hero { background: linear-gradient(135deg, rgba(122,162,255,.18), rgba(132,225,188,.08)); border: 1px solid var(--line); border-radius: 22px; padding: 28px; box-shadow: 0 18px 40px rgba(0,0,0,.24); }
+        h1 { margin: 0 0 8px; font-size: 2rem; line-height: 1.15; }
+        h2 { margin: 34px 0 12px; font-size: 1.35rem; }
+        h3 { margin: 22px 0 10px; font-size: 1.05rem; color: #fff; }
+        p, li { color: var(--text); line-height: 1.65; }
+        .muted { color: var(--muted); }
+        .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+        .chip { padding: 8px 12px; border:1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); color: var(--muted); font-size: .92rem; }
+        .section { background: rgba(18,26,49,.76); border:1px solid var(--line); border-radius: 20px; padding: 22px; margin-top: 18px; }
+        table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 14px; }
+        th, td { border-bottom: 1px solid var(--line); padding: 12px 10px; vertical-align: top; text-align: left; }
+        th { background: rgba(255,255,255,.04); color: #fff; font-weight: 700; font-size: .94rem; }
+        tr:hover td { background: rgba(255,255,255,.02); }
+        code, pre { background: var(--code); color: #d7e3ff; border: 1px solid #1d2a4d; border-radius: 14px; }
+        code { padding: 2px 6px; }
+        pre { padding: 16px; overflow:auto; }
+        ul { margin: 8px 0 0 20px; }
+        .note { border-left: 4px solid var(--accent); padding: 12px 14px; background: rgba(122,162,255,.08); border-radius: 10px; }
+        .warn { border-left: 4px solid var(--warn); background: rgba(255,211,110,.08); }
+        .danger { border-left: 4px solid var(--danger); background: rgba(255,138,138,.08); }
+        .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .kpi { background: rgba(255,255,255,.04); border:1px solid var(--line); border-radius: 18px; padding: 16px; }
+        .small { font-size: .93rem; }
+        .footer { margin-top: 22px; color: var(--muted); font-size: .92rem; }
+        @media (max-width: 820px) {
+            .grid { grid-template-columns: 1fr; }
+            .wrap { padding: 18px 14px 28px; }
+            .hero, .section { border-radius: 18px; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <section class="hero">
+        <h1>Termos de serviço</h1>
+        <p class="muted">Baseado nos serviços expostos pelos endpoints <code>/author</code> e <code>/evaluation-human</code> da API <strong>two-approval-content-backend</strong>.</p>
+        <div class="chips">
+            <span class="chip">Criador de conteúdo</span>
+            <span class="chip">Avaliador humano</span>
+            <span class="chip">IA + revisão humana</span>
+            <span class="chip">CNPJ/uso comercial permitido pelo projeto, sujeito à licença</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>1. Aceitação</h2>
+        <p>Ao enviar conteúdo para análise ou ao executar avaliação humana por meio desta API, você concorda com estes Termos de Serviço. O uso da API implica aceitação das regras técnicas, de segurança e de responsabilidade descritas abaixo.</p>
+    </section>
+
+    <section class="section">
+        <h2>2. Serviços cobertos</h2>
+        <ul>
+            <li><strong>Envio de conteúdo para análise</strong> via <code>POST /api/two-approval-content/author/evaluate</code>.</li>
+            <li><strong>Consulta do status do conteúdo</strong> via <code>PATCH /api/two-approval-content/author/content/{contentId}/find-status</code>.</li>
+            <li><strong>Listagem de conteúdos para avaliação humana</strong> via <code>GET /api/two-approval-content/evaluation-human/contents/search</code>.</li>
+            <li><strong>Envio da avaliação final humana</strong> via <code>POST /api/two-approval-content/evaluation-human/send-content-evaluation</code>.</li>
+        </ul>
+        <p>Os serviços podem armazenar título, corpo do conteúdo, e-mail do criador, nicho, chaves de avaliação, justificativas, status, respostas de IA, timestamps e referências de webhook.</p>
+    </section>
+
+    <section class="section">
+        <h2>3. Regras para criadores de conteúdo</h2>
+        <ul>
+            <li>Você declara que possui direito de uso do conteúdo enviado ou autorização para submetê-lo à análise.</li>
+            <li>O campo de e-mail deve ser válido e pertencer ao responsável pelo conteúdo ou a um contato autorizado.</li>
+            <li>O nicho informado deve refletir o tema real do conteúdo.</li>
+            <li>Se informar <code>notification</code>, o endpoint de webhook deve estar sob seu controle e aceitar o método HTTP informado.</li>
+            <li>O status inicial do conteúdo é <code>IN_REVIEW</code> e a existência de uma avaliação de IA não garante aprovação final.</li>
+            <li>O retorno do endpoint de status pode incluir justificativa de falha de notificação quando a entrega ao webhook não for concluída.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>4. Regras para avaliadores humanos</h2>
+        <ul>
+            <li>O acesso à área de avaliação humana exige JWT válido emitido pelo endpoint de login.</li>
+            <li>Você deve manter confidenciais <code>evaluationKey</code>, <code>secretId</code> e o token de acesso.</li>
+            <li>Um avaliador deve revisar apenas conteúdos do nicho ao qual está vinculado.</li>
+            <li>A justificativa enviada na avaliação final deve ser clara, verdadeira e profissional.</li>
+            <li>Enviar uma avaliação final altera o status do conteúdo e remove a avaliação de IA associada ao mesmo conteúdo e chave.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>5. Limitações do serviço</h2>
+        <ul>
+            <li>A IA atua como apoio à análise, não como garantia absoluta de qualidade, segurança, conformidade legal ou adequação editorial.</li>
+            <li>A decisão final pode depender de revisão humana e de regras internas da plataforma.</li>
+            <li>O serviço pode recusar, bloquear ou marcar conteúdos que apresentem inconsistências, violações de segurança ou dados incompletos.</li>
+            <li>A API utiliza integrações externas, incluindo serviço de IA, MongoDB, e-mail e webhook, que podem sofrer indisponibilidade fora do controle da aplicação.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>6. Uso proibido</h2>
+        <ul>
+            <li>Enviar conteúdo ilegal, fraudulento, difamatório, abusivo, discriminatório ou que viole direitos de terceiros.</li>
+            <li>Tentar burlar autenticação, cabeçalhos obrigatórios, limites internos ou controles de acesso.</li>
+            <li>Usar chaves, tokens ou secrets de outra pessoa.</li>
+            <li>Explorar a API para spam, scraping agressivo, automação abusiva ou carga excessiva.</li>
+            <li>Enviar webhooks maliciosos, endpoints falsos ou conteúdo com intenção de comprometer a infraestrutura.</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>7. Privacidade e tratamento de dados</h2>
+        <p>A API pode armazenar e processar dados operacionais necessários para o fluxo de aprovação, incluindo nomes, e-mails, nichos, justificativas, tokens e timestamps. O projeto analisado não contém política de privacidade formal; portanto, qualquer publicação em produção deve ser acompanhada de política própria compatível com a legislação aplicável.</p>
+    </section>
+
+    <section class="section">
+        <h2>8. Suspensão e encerramento</h2>
+        <p>A plataforma pode restringir ou encerrar o acesso de usuários que violem estes termos, que usem credenciais de forma indevida ou que comprometam a estabilidade e a segurança do sistema.</p>
+    </section>
+
+    <section class="section">
+        <h2>9. Isenção de garantias e limitação de responsabilidade</h2>
+        <p>O serviço é fornecido “como está”, sem garantia de disponibilidade contínua, ausência de erros ou aderência automática a requisitos legais e regulatórios específicos. Na extensão máxima permitida pela lei aplicável, a plataforma não se responsabiliza por perdas indiretas, lucros cessantes, interrupções de negócio ou decisões tomadas exclusivamente com base nos resultados de IA.</p>
+    </section>
+
+    <section class="section">
+        <h2>10. Atualizações destes termos</h2>
+        <p>Estes termos podem ser atualizados para refletir mudanças técnicas, legais ou operacionais da API. Recomenda-se publicar uma nova versão sempre que os endpoints, a autenticação ou o tratamento de dados sofrerem alteração relevante.</p>
+    </section>
+
+    <p class="footer">Esse é um projeto OpenSource e não poder áser usado até o presente momento, para comercialização com agentes externos. O mesmo pode receber contribuições da comunidade, porém não poderá ser baixado e utilizado para uso comercial. Pois a ideia desta API é somente para uso educativo.</p>
+
+</div>
+</body>
+</html>

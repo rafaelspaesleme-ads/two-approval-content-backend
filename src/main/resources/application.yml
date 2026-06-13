@@ -1,6 +1,9 @@
 spring:
   application:
-    name: two-approval-content-backend
+    name: "@app-name@"
+    version: "@app-version@"
+    description: "@app-description@"
+    base-url: ${BASE_URL}:${server.port}${server.servlet.context-path}
   data:
     mongodb:
       host: localhost
@@ -46,4 +49,25 @@ spring:
 
 server:
   servlet:
-    context-path: /api/two-approval-content
+    context-path: "@app-base-path@"
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+    display-request-duration: true
+  contacts:
+    site: "@contact-site@"
+    name: "@contact-name@"
+    email: "@contact-email@"
+  docs:
+    doc: "@docs-doc@"
+    doc-name: "@docs-doc-name@"
+    license: "@docs-license@"
+    license-name: "@docs-license-name@"
+    term: "@docs-term@"
+

@@ -28,7 +28,7 @@ public class UserControllerImpl extends ResponseControllerImpl implements UserCo
     @Override
     public ResponseEntity<ApiResponse<List<NichesEnum>>> niches(HttpServletRequest servletRequest) {
 
-        return super.setCreate(
+        return super.setOk(
                 Arrays.stream(NichesEnum.values()).toList(),
                 "Nichos de avaliadores",
                 Collections.singletonList("Nichos para avaliadores retornados com sucesso!"),
