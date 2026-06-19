@@ -55,7 +55,7 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
 
     @Override
     public List<ContentDocument> searchContent(String evaluationKey) {
-        return repository.findAllByEvaluationKeyAndStatusOrderByCreatedAtAsc(evaluationKey, StatusEvaluationEnum.IN_REVIEW);
+        return this.repository.findAllByEvaluationKeyAndStatusOrderByCreatedAtAsc(evaluationKey, StatusEvaluationEnum.IN_REVIEW);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ContentGatewayImpl extends PersistGatewayImpl implements ContentGat
     @Override
     public ContentDocument findContentById(String contentId) {
         return this.repository.findById(contentId)
-                .orElseThrow(() -> new BusinessNotFoundException("Conteúdo não encontrado"));
+                .orElseThrow(() -> new BusinessNotFoundException("Conteúdo não encontrado."));
     }
 
     @Override

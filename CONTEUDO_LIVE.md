@@ -33,7 +33,7 @@
 
 - 15º Live: Configurações do Swagger - ok
 
-- 16º Live: Criação de testes unitários
+- 16º Live: Criação de testes unitários - ok
 
 - 17º Live: Realização de testes de integração
 

@@ -1,5 +1,6 @@
 package br.com.twoapprovalcontentbackend.infraestructure.enums;
 
+import br.com.twoapprovalcontentbackend.infraestructure.exceptions.BusinessNotFoundException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -59,6 +60,6 @@ public enum NichesEnum {
                         || n.getDescriptionPtBr().equalsIgnoreCase(niche)
                         || n.getDescriptionEng().equalsIgnoreCase(niche))
                 .findFirst()
-                .orElseThrow(() -> new UsernameNotFoundException("Nicho não encontrado. Entre em contato com nosso suporte técnico."));
+                .orElseThrow(() -> new BusinessNotFoundException("Nicho não encontrado. Entre em contato com nosso suporte técnico."));
     }
 }
