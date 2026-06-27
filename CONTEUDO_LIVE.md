@@ -35,7 +35,7 @@
 
 - 16º Live: Criação de testes unitários - ok
 
-- 17º Live: Realização de testes de integração
+- 17º Live: Realização de testes de integração - ok
 
 - 18º Live: Criação do Dockerfile da API
 

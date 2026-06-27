@@ -9,5 +9,8 @@
 	"nicheFit": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsyXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
 	"nicheGamer": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsxMF0uZGVzY3JpcHRpb25Fbmc=::46b', 'never', 60 %}",
 	"contentId": "{% response 'body', 'req_91352a710c7745bdba818f3d8b681638', 'b64::JC5kYXRhLmNvbnRlbnRJZA==::46b', 'never', 60 %}",
-	"token": "Bearer {% response 'body', 'req_97305581e2c24a7a8d2d33f62ce0b1fd', 'b64::JC5kYXRhLnRva2Vu::46b', 'never', 60 %}"
+	"AIJustification": "{% response 'body', 'req_a0411e9b30034f42b1e7e447108c6d7f', 'b64::JC5kYXRhLlswXS5haUV2YWx1YXRpb24uanVzdGlmaWNhdGlvbg==::46b', 'never', 60 %}",
+	"token": "Bearer {% response 'body', 'req_97305581e2c24a7a8d2d33f62ce0b1fd', 'b64::JC5kYXRhLnRva2Vu::46b', 'never', 60 %}",
+	"REJECTED": "REJECTED",
+	"APPROVED": "APPROVED"
 }

@@ -1,9 +1,154 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2026-05-09T04:00:27.640Z",
+  "__export_date": "2026-06-27T03:35:02.485Z",
   "__export_source": "insomnia.desktop.app:v2022.7.0",
   "resources": [
+    {
+      "_id": "req_4a46b07a335148a59d31340e17a8040b",
+      "parentId": "fld_f3c29033f6404af9869ceb400d110f81",
+      "modified": 1782528806161,
+      "created": 1780117027154,
+      "url": "https://webhook.site/7565f8c4-bb13-46a4-a9c6-e33d64d81a88",
+      "name": "webhooks",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"id\": 7, \"name\": \"Jack Daniels\", \"position\": \"Assistant\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "content-type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1780117027154,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_f3c29033f6404af9869ceb400d110f81",
+      "parentId": "fld_5ba6d13bd4b64a959783927f4286bd6f",
+      "modified": 1780428841575,
+      "created": 1780428841575,
+      "name": "testes",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1780428841575,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_5ba6d13bd4b64a959783927f4286bd6f",
+      "parentId": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "modified": 1778298898478,
+      "created": 1778298898478,
+      "name": "content-approval-api",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1778298898478,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
+      "parentId": null,
+      "modified": 1780117027157,
+      "created": 1778298701298,
+      "name": "Lives",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_a0411e9b30034f42b1e7e447108c6d7f",
+      "parentId": "fld_73c30086ac82472d87fbc01002be2250",
+      "modified": 1782529666100,
+      "created": 1778905845731,
+      "url": "http://localhost:8080/api/two-approval-content/evaluation-human/contents/search?evaluationKey={{ _.evaluationKey }}",
+      "name": "evaluations-search",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1d4d09b62706421b829b4ba9f0200900",
+          "name": "Authorization",
+          "value": "{{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778298987515,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_73c30086ac82472d87fbc01002be2250",
+      "parentId": "fld_5ba6d13bd4b64a959783927f4286bd6f",
+      "modified": 1779507605748,
+      "created": 1779507605748,
+      "name": "evaluation",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1779507605748,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_a9730a92ff48410f887d1974de14011a",
+      "parentId": "fld_73c30086ac82472d87fbc01002be2250",
+      "modified": 1782530881503,
+      "created": 1779507660888,
+      "url": "http://localhost:8080/api/two-approval-content/evaluation-human/send-content-evaluation",
+      "name": "send-content-evaluation",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"evaluationKey\": \"{{ _.evaluationKey }}\",\n  \"contentId\": \"{{ _.contentId }}\",\n  \"status\": \"{{ _.REJECTED }}\",\n  \"justification\": \"Consideramos o conteúdo invalido, falso, e confuso. Resumo da IA: {{ _.AIJustification }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1d4d09b62706421b829b4ba9f0200900",
+          "name": "Authorization",
+          "value": "{{ _.token }}",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_57898f8371fb4658a36b75b3232658e6"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1778298958788,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
     {
       "_id": "req_97305581e2c24a7a8d2d33f62ce0b1fd",
       "parentId": "fld_c6d509dd3c6647b9a08f3632ae2c6c74",
@@ -52,31 +197,9 @@
       "_type": "request_group"
     },
     {
-      "_id": "fld_5ba6d13bd4b64a959783927f4286bd6f",
-      "parentId": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
-      "modified": 1778298898478,
-      "created": 1778298898478,
-      "name": "content-approval-api",
-      "description": "",
-      "environment": {},
-      "environmentPropertyOrder": null,
-      "metaSortKey": -1778298898478,
-      "_type": "request_group"
-    },
-    {
-      "_id": "wrk_8a8aa8c2e2604cc8b2fc6c21300a8011",
-      "parentId": null,
-      "modified": 1778299081968,
-      "created": 1778298701298,
-      "name": "Lives",
-      "description": "",
-      "scope": "collection",
-      "_type": "workspace"
-    },
-    {
       "_id": "req_f5c8a54ba7cb46e6851e5091c0194a76",
       "parentId": "fld_c6d509dd3c6647b9a08f3632ae2c6c74",
-      "modified": 1778299119594,
+      "modified": 1782529526556,
       "created": 1778299067017,
       "url": "http://localhost:8080/api/two-approval-content/user/register",
       "name": "register",
@@ -84,7 +207,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"fullname\": \"Caio Vitorino Faria\",\n  \"email\": \"caio.faria@geradornv.com.br\",\n  \"niche\": \"Health & Wellness\",\n  \"comments\": \"teste\"\n}"
+        "text": "{\n  \"fullname\": \"Aldemar Cretella Manhães\",\n  \"email\": \"rafaelspaesleme.ads@gmail.com\",\n  \"niche\": \"Esportes e Lazer\",\n  \"comments\": \"Episodio 25 - Testes\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -146,7 +269,7 @@
     {
       "_id": "req_303c55d105d048dcb14a0e5c758ef143",
       "parentId": "fld_cdca6974ee444530acaec4a2c541c0c3",
-      "modified": 1778299175271,
+      "modified": 1782529696084,
       "created": 1778299020034,
       "url": "http://localhost:8080/api/two-approval-content/author/content/{{ _.contentId }}/find-status",
       "name": "find-status",
@@ -164,6 +287,12 @@
           "name": "Cookie",
           "value": "JSESSIONID=E822F14FF2644E9A839296B983499549",
           "id": "pair_c78ca802e06a415a8fa16e67f660cfb3"
+        },
+        {
+          "id": "pair_89c2db0bb31b48cc924fe6fcd28ad601",
+          "name": "",
+          "value": "",
+          "description": ""
         }
       ],
       "authentication": {},
@@ -192,7 +321,7 @@
     {
       "_id": "req_91352a710c7745bdba818f3d8b681638",
       "parentId": "fld_cdca6974ee444530acaec4a2c541c0c3",
-      "modified": 1778299190736,
+      "modified": 1782530690646,
       "created": 1778298930011,
       "url": "http://localhost:8080/api/two-approval-content/author/evaluate",
       "name": "evaluate",
@@ -200,7 +329,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"fullname\": \"Rivaldo Ronaldo\",\n  \"title\": \"Barcelona por perde de 8 a 2.\",\n  \"content\": \"Em 2020, o Bayern Munich sofreu uma goleada do Barcelona por 8 a 2 pelas semifinais da Champions. O Arsenal também quebrou um jejum de 30 anos e foi campeão do campeonato argentino.\",\n  \"email\": \"rspleme.1989@gmail.com\",\n  \"niche\": \"TECHNOLOGY\"\n}"
+        "text": "{\n  \"fullname\": \"Josildo Marotti Estevam\",\n  \"title\": \"Espanha campeã do mundo em 2010\",\n  \"content\": \"No dia 17 de julho de 1994, no Rose Bowl, em Pasadena (EUA), a Argentina conquistou seu bi campeonato mundial ao vencer a Alemanha por 3 a 2 no tempo regulamentar, após um empate sem gols no primeiro tempo, no segundo, com 3 gols de Maradona, e 2 de Bob Charlton para a Alemanha. Foi a primeira final de Copa do Mundo no Mexico. O técnico Carlos Alberto Parreira comandou um time liderado por Passarela e que teve em Maradona seu grande nome. O Argentina quebrou um jejum de 24 anos sem títulos. O astro italiano Roberto Baggio, lesionado, não disputou essa copapela esquadra Azzurra\",\n  \"email\": \"rafaelspaesleme.e.sports@gmail.com\",\n\t\"notification\": {\n\t\t\"url\": \"https://webhook.site/7565f8c4-bb13-46a4-a9c6-e33d64d81a88\",\n\t\t\"httpMethod\": \"POST\"\n\t},\n  \"niche\": \"Esportes e Lazer\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -266,20 +395,24 @@
     {
       "_id": "env_d5ecf0a6e65244f9ada4e176451c5dc1",
       "parentId": "env_27b77bf83a3fc67f77c67eff9ada80be230635a6",
-      "modified": 1778298790810,
+      "modified": 1782530851363,
       "created": 1778298750710,
       "name": "content-approval-api",
       "data": {
         "baseUrl": "http://localhost:8080/api/two-approval-content",
         "apiKey": "af7f3dce-7268-489d-baab-f8d02006c727",
         "apiContentKey": "c0569186-1e09-4e9d-ad33-47c655d1f552",
-        "evaluationKey": "{% response 'body', 'req_d8efb47a2dbd443bba2471af729bc002', 'b64::JC5kYXRhLmV2YWx1YXRpb25LZXk=::46b', 'never', 60 %}",
-        "secretId": "{% response 'body', 'req_d8efb47a2dbd443bba2471af729bc002', 'b64::JC5kYXRhLnNlY3JldElk::46b', 'never', 60 %}",
-        "nicheTech": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlswXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
-        "nicheHealth": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsxXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
-        "nicheFit": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsyXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
-        "nicheGamer": "{% response 'body', 'req_053292df4f3e415e9e45f1cab84ad13c', 'b64::JC5kYXRhLlsxMF0uZGVzY3JpcHRpb25Fbmc=::46b', 'never', 60 %}",
-        "contentId": "{% response 'body', 'req_baafb87a7f2a48d58d24ff9241080547', 'b64::JC5kYXRhLmNvbnRlbnRJZA==::46b', 'never', 60 %}"
+        "evaluationKey": "{% response 'body', 'req_f5c8a54ba7cb46e6851e5091c0194a76', 'b64::JC5kYXRhLmV2YWx1YXRpb25LZXk=::46b', 'never', 60 %}",
+        "secretId": "{% response 'body', 'req_f5c8a54ba7cb46e6851e5091c0194a76', 'b64::JC5kYXRhLnNlY3JldElk::46b', 'never', 60 %}",
+        "nicheTech": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlswXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+        "nicheHealth": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsxXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+        "nicheFit": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsyXS5kZXNjcmlwdGlvbkVuZw==::46b', 'never', 60 %}",
+        "nicheGamer": "{% response 'body', 'req_ddf5d8d1844f4c4c86b4bb9cdf1ab146', 'b64::JC5kYXRhLlsxMF0uZGVzY3JpcHRpb25Fbmc=::46b', 'never', 60 %}",
+        "contentId": "{% response 'body', 'req_91352a710c7745bdba818f3d8b681638', 'b64::JC5kYXRhLmNvbnRlbnRJZA==::46b', 'never', 60 %}",
+        "AIJustification": "{% response 'body', 'req_a0411e9b30034f42b1e7e447108c6d7f', 'b64::JC5kYXRhLlswXS5haUV2YWx1YXRpb24uanVzdGlmaWNhdGlvbg==::46b', 'never', 60 %}",
+        "token": "Bearer {% response 'body', 'req_97305581e2c24a7a8d2d33f62ce0b1fd', 'b64::JC5kYXRhLnRva2Vu::46b', 'never', 60 %}",
+        "REJECTED": "REJECTED",
+        "APPROVED": "APPROVED"
       },
       "dataPropertyOrder": {
         "&": [
@@ -292,7 +425,11 @@
           "nicheHealth",
           "nicheFit",
           "nicheGamer",
-          "contentId"
+          "contentId",
+          "AIJustification",
+          "token",
+          "REJECTED",
+          "APPROVED"
         ]
       },
       "color": "#310acd",
