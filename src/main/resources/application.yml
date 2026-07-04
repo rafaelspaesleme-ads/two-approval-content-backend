@@ -6,8 +6,8 @@ spring:
     base-url: ${BASE_URL}:${server.port}${server.servlet.context-path}
   data:
     mongodb:
-      host: localhost
-      port: 27017
+      host: ${HOST_MONGO_DB}
+      port: ${PORT_MONGO_DB}
       username: ${USERNAME_MONGO_DB}
       password: ${PASSWORD_MONGO_DB}
       database: ${DB_MONGO_DB}

@@ -37,7 +37,7 @@
 
 - 17º Live: Realização de testes de integração - ok
 
-- 18º Live: Criação do Dockerfile da API
+- 18º Live: Criação do Dockerfile da API - ok
 
 - 19º Live: Deploy da API
 
