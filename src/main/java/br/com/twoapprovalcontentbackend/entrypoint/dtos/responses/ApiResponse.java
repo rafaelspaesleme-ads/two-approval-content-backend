@@ -2,6 +2,8 @@ package br.com.twoapprovalcontentbackend.entrypoint.dtos.responses;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -31,6 +33,8 @@ public record ApiResponse<T>(
         String lsMsg = CollectionUtils.isEmpty(lsMessage) ? "[]" : "[%s]".formatted(lsMessage.stream().map("\"%s\""::formatted).collect(Collectors.joining(",")));
 
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         long size = 0;
         long count = 0;
