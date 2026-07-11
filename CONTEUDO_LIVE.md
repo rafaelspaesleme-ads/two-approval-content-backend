@@ -39,6 +39,6 @@
 
 - 18º Live: Criação do Dockerfile da API - ok
 
-- 19º Live: Deploy da API
+- 19º Live: Deploy da API - ok
 
 - 20º Live de fechamento: Documentação e analises da API (Plus: Apresentação o novo projeto)
