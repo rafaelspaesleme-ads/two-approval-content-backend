@@ -41,4 +41,4 @@
 
 - 19º Live: Deploy da API - ok
 
-- 20º Live de fechamento: Documentação e analises da API (Plus: Apresentação o novo projeto)
+- 20º Live de fechamento: Documentação e analises da API (Plus: Apresentação o novo projeto) - ok
